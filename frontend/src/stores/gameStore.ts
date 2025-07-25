@@ -1,3 +1,11 @@
+import type { Dialog } from '@/entity/Dialog'
+import { intro } from '@/entity/dialogs/intro'
 import { defineStore } from 'pinia'
 
-const useGameManager = defineStore('gameManager', () => {})
+export const useGameManager = defineStore('gameManager', () => {
+  function getDialog(id: number): Dialog[] {
+    return intro
+  }
+
+  return { getDialog }
+})

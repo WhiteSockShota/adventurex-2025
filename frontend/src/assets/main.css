@@ -1,6 +1,16 @@
 @font-face {
   font-family: MiSans;
-  src: url(..//fonts/MiSansVF.ttf);
+  src: url(./fonts/MiSansVF.ttf);
+}
+
+@font-face {
+  font-family: JetbrainsMono;
+  src: url(./fonts/JetBrainsMono-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: Orbix;
+  src: url(./fonts/Orbix-Regular.ttf);
 }
 
 body {

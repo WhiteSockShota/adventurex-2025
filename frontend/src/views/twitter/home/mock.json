@@ -1,0 +1,102 @@
+[
+  {
+    "nickname": "困困困困困困",
+    "username": "sleepyzzz",
+    "content": "昨晚又熬夜写代码，今天困到不行。Why is coding so addictive? I just can’t stop once I start, even if I know I’ll regret it tomorrow morning."
+  },
+  {
+    "nickname": "小菜鸡",
+    "username": "noobmaster",
+    "content": "终于搞懂了Vue的响应式原理，感动哭了😭 Now I can finally explain reactivity to my friends, but they still think I’m weird."
+  },
+  {
+    "nickname": "卷王之王",
+    "username": "rollrollroll",
+    "content": "Leetcode 刷到第200题，头发还在。Sometimes I wonder if algorithms will ever help me in real life, but at least my resume looks cool."
+  },
+  {
+    "nickname": "摸鱼达人",
+    "username": "fishmaster",
+    "content": "今天摸鱼被老板发现了，差点社死。Pretending to be busy is an art, but my acting skills need improvement."
+  },
+  {
+    "nickname": "Sunny",
+    "username": "sunnybunny",
+    "content": "Coding with sunlight feels different, maybe I’ll have fewer bugs today. The weather is perfect for some productive hours at the desk."
+  },
+  {
+    "nickname": "代码如诗",
+    "username": "codepoet",
+    "content": "Refactoring old code feels like spring cleaning. 代码也要断舍离，写得越多越觉得简洁才是美。"
+  },
+  {
+    "nickname": "夜猫子",
+    "username": "nightowl",
+    "content": "凌晨三点debug，bug和我都不睡。Sometimes the best solutions come when everyone else is asleep."
+  },
+  {
+    "nickname": "小宇宙爆发",
+    "username": "cosmicboom",
+    "content": "新项目上线啦！All-nighter paid off. Launching a project is like sending your kid to school for the first time."
+  },
+  {
+    "nickname": "咕咕咕",
+    "username": "gugugu",
+    "content": "拖延症晚期，ddl前一晚才开始写。Procrastination is my superpower, but the stress is real."
+  },
+  {
+    "nickname": "CodeFreak",
+    "username": "codefreak",
+    "content": "Is this passion or addiction? Maybe both. I just spent my whole weekend building a side project and I loved every minute."
+  },
+  {
+    "nickname": "LazyCat",
+    "username": "lazycat",
+    "content": "Sleep is important, but so is finishing this feature. Why do deadlines always come so fast?"
+  },
+  {
+    "nickname": "SmartCookie",
+    "username": "smartcookie",
+    "content": "Automation is the future, and I’m just getting started. My new script saves me 30 minutes every day!"
+  },
+  {
+    "nickname": "NoSleepDev",
+    "username": "nosleepdev",
+    "content": "Pulled another all-nighter to fix a production bug. Coffee is my best friend now."
+  },
+  {
+    "nickname": "MelonWatcher",
+    "username": "melonwatcher",
+    "content": "The drama never ends on tech Twitter. Sometimes I learn more from the comments than the original post."
+  },
+  {
+    "nickname": "代码搬运工",
+    "username": "codemover",
+    "content": "StackOverflow 是我的第二大脑。Copy, paste, pray, repeat."
+  },
+  {
+    "nickname": "小憨憨",
+    "username": "sillygoose",
+    "content": "console.log 一切，debug无敌。If in doubt, just print it out."
+  },
+  {
+    "nickname": "咸鱼翻身",
+    "username": "lazyfish",
+    "content": "今天终于学会了正则表达式！Regex is like magic, but sometimes it feels like black magic."
+  },
+  {
+    "nickname": "小太阳",
+    "username": "sunnybunny2",
+    "content": "阳光正好，适合写点代码。Coding with sunlight feels different, maybe I’ll have fewer bugs today."
+  },
+  {
+    "nickname": "吃土少女",
+    "username": "poorgirl",
+    "content": "买了新键盘，钱包又瘦了。Mechanical keyboards are my weakness, but they make coding so much more fun."
+  },
+  {
+    "nickname": "代码狂魔",
+    "username": "codefreak2",
+    "content": "一天不写代码浑身难受。Is this passion or addiction? Maybe both."
+  }
+]

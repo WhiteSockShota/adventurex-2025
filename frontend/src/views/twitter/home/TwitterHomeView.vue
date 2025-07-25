@@ -36,12 +36,8 @@ async function appendMockData() {
     console.log(mockData.value.length)
     mockCount.value++
     shakeFactor.value = mockCount.value * 50
-    if(mockCount.value > 3) {
-        gsap.to("#container", {
-            display: 'none'
-        })
-        await sleep(5000)
-        router.push('/main')
+    if (mockCount.value > 3) {
+        router.push('/dialog?id=1')
     }
 }
 
@@ -60,7 +56,9 @@ async function appendMockData() {
             <div id="container">
                 <TwitterThread v-for="mock in mockData" :content="mock.content" :nickname="mock.nickname"
                     :username="mock.username" class="w-full" :start-shuffle-string="(mockCount > 1)" />
-                    <Obserable @appear="appendMockData()"><p class="opacity-0">LOADING</p></Obserable>
+                <Obserable @appear="appendMockData()">
+                    <p class="opacity-0">LOADING</p>
+                </Obserable>
             </div>
         </IconoirProvider>
     </div>

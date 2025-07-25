@@ -5,6 +5,7 @@ import TwitterHomeView from '@/views/twitter/home/TwitterHomeView.vue'
 import TwitterMessagesView from '@/views/twitter/messages/TwitterMessagesView.vue'
 import MainView from '@/views/main/MainView.vue'
 import IntroView from '@/views/main/IntroView.vue'
+import DialogView from '@/views/main/DialogView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +13,10 @@ const router = createRouter({
     {
       path: '/',
       component: HomeView,
+    },
+    {
+      path: '/dialog',
+      component: DialogView,
     },
     {
       path: '/main',

@@ -36,7 +36,7 @@ function enterCommand() {
 
 <template>
     <div class="w-full h-full flex flex-col items-center justify-center bg-white">
-        <div class="w-50% color-white bg-black p10">
+        <div class="lg:w-50% w-80% color-white bg-black p10">
             <p class="font-[JetbrainsMono] m0 mb-2rem">/TERMINAL</p>
             <p id="question" class="font-[JetbrainsMono,MiSans] text-1rem"></p>
             <div class="flex items-center">

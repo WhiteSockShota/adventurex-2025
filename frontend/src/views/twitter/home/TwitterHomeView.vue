@@ -6,64 +6,51 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { sleep } from '@/utils/async';
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import Obserable from '@/components/Obserable.vue';
+import { useRouter } from 'vue-router';
 
 const shakeOffset = ref(0)
-const shakeFactor = ref(500)
+const shakeFactor = ref(0)
+
+const router = useRouter()
+
+const mockData = ref(mocks)
 
 async function startShaking() {
     while (true) {
         shakeOffset.value = Math.random() * shakeFactor.value - shakeFactor.value / 2
-        await sleep(100)
+        await sleep(1)
         //console.log(shakeFactor.value)
     }
 }
 
-function handleScroll() {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
-    shakeFactor.value = progress;
-    console.log('原生监听进度:', progress.toFixed(3));
-}
 
 onMounted(() => {
     startShaking()
 })
 
-// onMounted(() => {
-//     gsap.registerPlugin(ScrollTrigger)
+const mockCount = ref(0)
 
-//     ScrollTrigger.create({
-//         trigger: '#container',
-//         start: 'top top',
-//         end: 'bottom 50%+=100px',
-//         onToggle: (self) => console.log('toggled, isActive:', self.isActive),
-//         onUpdate: (self) => {
-//             console.log(
-//                 'progress:',
-//                 self.progress.toFixed(3),
-//                 'direction:',
-//                 self.direction,
-//                 'velocity',
-//                 self.getVelocity()
-//             );
-//         }
-//     });
-// })
+async function appendMockData() {
+    mockData.value = mockData.value.concat(mocks)
+    console.log(mockData.value.length)
+    mockCount.value++
+    shakeFactor.value = mockCount.value * 50
+    if(mockCount.value > 3) {
+        gsap.to("#container", {
+            display: 'none'
+        })
+        await sleep(5000)
+        router.push('/main')
+    }
+}
 
-onMounted(() => {
-    window.addEventListener('scroll', handleScroll);
-});
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-});
 </script>
 
 <template>
-    <div class="min-w-full h-full" :style="{
+    <div class="min-w-full max-h-full overflow-y-auto" :style="{
         transform: `translateX(${shakeOffset * Math.random()}px) translateY(${shakeOffset * Math.random()}px)`
-    }">
+    }" id="container">
         <IconoirProvider :icon-props="{
             'color': '#000',
             'stroke-width': 2,
@@ -71,8 +58,9 @@ onUnmounted(() => {
             'height': '1em',
         }" class="w-full">
             <div id="container">
-                <TwitterThread v-for="mock in mocks" :content="mock.content" :nickname="mock.nickname"
-                    :username="mock.username" class="w-full" />
+                <TwitterThread v-for="mock in mockData" :content="mock.content" :nickname="mock.nickname"
+                    :username="mock.username" class="w-full" :start-shuffle-string="(mockCount > 1)" />
+                    <Obserable @appear="appendMockData()"><p class="opacity-0">LOADING</p></Obserable>
             </div>
         </IconoirProvider>
     </div>

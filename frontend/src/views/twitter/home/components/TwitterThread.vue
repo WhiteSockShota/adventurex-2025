@@ -7,7 +7,8 @@ import { onMounted, ref } from 'vue';
 const props = defineProps({
     content: String,
     username: String,
-    nickname: String
+    nickname: String,
+    startShuffleString: Boolean
 })
 
 const param = ref(0)
@@ -26,8 +27,13 @@ function randomString(param: number, string: string): string {
 
 onMounted(async () => {
     while (true) {
-        param.value++
-        await sleep(100)
+        if (props.startShuffleString) {
+            param.value++
+        }
+        else {
+            param.value = 0
+        }
+        await sleep(1)
     }
 })
 

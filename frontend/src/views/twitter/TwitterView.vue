@@ -33,7 +33,7 @@ import FakeNavButton from './home/components/FakeNavButton.vue';
 
         <div class="w-50% h-full border-black/20 border-[0.05px] border-x-solid">
 
-            <RouterView class="overflow-y-auto"></RouterView>
+            <RouterView></RouterView>
 
         </div>
 

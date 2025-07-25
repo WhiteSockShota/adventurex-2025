@@ -3,8 +3,27 @@ name = "backend"
 version = "0.1.0"
 edition = "2024"
 
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
-ai-types = "0.2.0"
-axum = { version = "0.8.4", features = ["ws"] }
+ai-types = { version = "0.2.0", features = ["serde"] }
+axum = { version = "0.8.4", default-features = false, features = ["json"] }
+serde = { version = "1.0.219", features = ["derive"] }
 tower-service = "0.3.3"
-worker = { version = "0.6.0", features = ["http"] }
+worker = { version = "0.6.0", features = ["http","d1"] }
+web-sys = { version = "0.3.77", features = ["Crypto", "Window"] }
+time = { version = "0.3.41", features = ["serde"] }
+sse-stream = "0.2.1"
+futures-util = "0.3.31"
+
+
+[lints]
+clippy.all = "warn"
+clippy.style = "warn"
+clippy.correctness = "warn"
+clippy.complexity = "warn"
+clippy.suspicious = "warn"
+clippy.perf = "warn"
+clippy.nursery = "warn"

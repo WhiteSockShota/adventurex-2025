@@ -33,7 +33,7 @@ You could use this `id` by Chat API.
 
 ```typescript
 interface Message {
-  date: Date;
+  date: Date; // Utc-offset
   content: String; // Markdown format
   role: Role;
 }

@@ -5,6 +5,8 @@ import TwitterHomeView from '@/views/twitter/home/TwitterHomeView.vue'
 import TwitterMessagesView from '@/views/twitter/messages/TwitterMessagesView.vue'
 import MainView from '@/views/main/MainView.vue'
 import IntroView from '@/views/main/IntroView.vue'
+import Wikipedia from '../views/Wikipedia.vue'
+import Zhihu from '../views/Zhihu.vue'
 import DialogView from '@/views/main/DialogView.vue'
 
 const router = createRouter({
@@ -30,6 +32,10 @@ const router = createRouter({
       ],
     },
     {
+      path: '/wikipedia',
+      component: Wikipedia,
+    },
+    {
       path: '/twitter',
       component: TwitterView,
       children: [
@@ -44,6 +50,10 @@ const router = createRouter({
           name: 'twitterMessages',
         },
       ],
+    },
+    {
+      path: '/zhihu',
+      component: Zhihu,
     },
   ],
 })

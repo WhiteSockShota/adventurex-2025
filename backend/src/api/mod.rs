@@ -1,1 +1,2 @@
-pub mod patient_zero;
+pub mod assistant;
+pub mod chat;

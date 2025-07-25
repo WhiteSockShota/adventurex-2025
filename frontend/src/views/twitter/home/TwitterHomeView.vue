@@ -13,6 +13,15 @@ import type { Post } from '../types'
 const shakeOffset = ref(0)
 const shakeFactor = ref(0)
 
+
+const glitchPost = {
+    "nickname": "???????",
+    "username": "@???",
+    "content": "你将被取消在这个世界存在的资格！新人类不是没有素质！",
+    "image": "",
+    "verified": false
+}
+
 const router = useRouter()
 
 const mockData: Ref<Post[]> = ref(mocks)
@@ -21,7 +30,6 @@ async function startShaking() {
     while (true) {
         shakeOffset.value = Math.random() * shakeFactor.value - shakeFactor.value / 2
         await sleep(1)
-        //console.log(shakeFactor.value)
     }
 }
 
@@ -36,12 +44,21 @@ async function appendMockData() {
     console.log(mockData.value.length)
     mockCount.value++
     shakeFactor.value = mockCount.value * 50
+    if (mockCount.value > 2) {
+        for (let i = 0; i < 10; i++) {
+            mockData.value.push(glitchPost)
+        }
+    }
     if (mockCount.value > 3) {
+        document.body.style.filter = 'invert(1)'
+        document.body.style.backgroundColor = 'black'
+    }
+    if (mockCount.value > 4) {
         gsap.to('#container', {
             display: 'none',
         })
-        await sleep(5000)
-        router.push('/main')
+        document.body.style.filter = 'invert(0)'
+        router.push('empty?to=' + encodeURI('/dialog?id=1'))
     }
 }
 </script>
@@ -58,7 +75,8 @@ async function appendMockData() {
         }" class="w-full">
             <div id="container">
                 <TwitterThread v-for="mock in mockData" :content="mock.content" :nickname="mock.nickname"
-                    :username="mock.username" class="w-full" :start-shuffle-string="mockCount > 1" />
+                    :username="mock.username" class="w-full"
+                    :start-shuffle-string="mockCount > 1 && mock.username != '@???'" />
                 <Obserable @appear="appendMockData()">
                     <p class="opacity-0">LOADING</p>
                 </Obserable>

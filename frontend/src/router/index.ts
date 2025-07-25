@@ -8,6 +8,7 @@ import IntroView from '@/views/main/IntroView.vue'
 import Wikipedia from '../views/Wikipedia.vue'
 import Zhihu from '../views/Zhihu.vue'
 import DialogView from '@/views/main/DialogView.vue'
+import EmptyView from '@/views/EmptyView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +20,10 @@ const router = createRouter({
     {
       path: '/dialog',
       component: DialogView,
+    },
+    {
+      path: '/empty',
+      component: EmptyView,
     },
     {
       path: '/main',

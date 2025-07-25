@@ -6,7 +6,7 @@ import TwitterMessagesView from '@/views/twitter/messages/TwitterMessagesView.vu
 import MainView from '@/views/main/MainView.vue'
 import IntroView from '@/views/main/IntroView.vue'
 import Wikipedia from '../views/Wikipedia.vue'
-
+import Zhihu from '../views/Zhihu.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -45,6 +45,10 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/zhihu',
+      component: Zhihu,
+    }
   ],
 })
 

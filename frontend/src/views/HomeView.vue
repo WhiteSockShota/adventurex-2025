@@ -27,8 +27,6 @@ function handleStartClick() {
   }
 }
 
-const tip = new Tip("Test", "Test tip")
-tip.show()
 </script>
 
 <!-- src/components/StartScreen.vue -->

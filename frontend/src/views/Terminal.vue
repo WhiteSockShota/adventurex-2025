@@ -49,7 +49,7 @@
 import { useAudioEffects } from '@/utils/audioEffect'
 import { ref, onMounted, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Terminal, Command, Cd, Ls, Cat, Touch, Mkdir, Rm, Zero } from '@/entity/terminal'
+import { Terminal, Cd, Ls, Cat, Touch, Mkdir, Rm, Zero } from '@/entity/terminal'
 
 // --- Component State ---
 const history = ref([])

@@ -1,8 +1,12 @@
-interface SavePoint{
-    id:string,
-    url:string,
+interface SavePoint {
+  id: string
+  url: string
 }
 
-const savePoints:SavePoint[] = [
-    
-]
+export default class SavePointManager {
+  private savePoints: SavePoint[] = []
+
+  go(id: string, url: string): void {
+    this.savePoints.push({ id, url })
+  }
+}

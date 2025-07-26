@@ -11,6 +11,8 @@ import DialogView from '@/views/main/DialogView.vue'
 import Zhihu from '@/views/Zhihu.vue'
 import WarningView from '@/views/main/warning/WarningView.vue'
 import PlainTextView from '@/views/PlainTextView.vue'
+import TwitterHomeStaticView from '@/views/TwitterHomeStaticView.vue'
+import TwitterMessagesStaticView from '@/views/TwitterMessagesStaticView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,6 +73,22 @@ const router = createRouter({
     {
       path: '/zhihu',
       component: Zhihu,
+    },
+    {
+      path: '/x',
+      component: TwitterView,
+      children: [
+        {
+          path: '',
+          component: TwitterHomeStaticView,
+          name: 'twitterHomeStatic',
+        },
+        {
+          path: 'messages',
+          component: TwitterMessagesStaticView,
+          name: 'twitterMessagesStatic',
+        },
+      ],
     },
   ],
 })

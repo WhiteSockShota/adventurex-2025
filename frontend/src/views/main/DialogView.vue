@@ -80,6 +80,7 @@ function nextDialog() {
   }
   if (currentDialog.value.nextPage != undefined) {
     router.push(decodeURI(currentDialog.value.nextPage))
+    return
   }
   if (currentDialog.value.options.length != 0) {
     const options = currentDialog.value.options

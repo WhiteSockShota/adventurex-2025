@@ -22,7 +22,8 @@
     "vue": "^3.5.17",
     "vue-powerglitch": "^1.1.0",
     "vue-router": "^4.5.1",
-    "vue-winbox": "^0.1.0"
+    "vue-toastification": "^2.0.0-rc.5",
+    "vue-winbox": "^0.2.3"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",

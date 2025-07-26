@@ -32,9 +32,7 @@ function handleStartClick() {
     <div class="absolute inset-0 animate-pulse opacity-10 bg-gradient-to-br from-red-500 via-black to-blue-500"></div>
 
     <!-- 标题 -->
-    <h1 class="text-6xl font-bold tracking-widest z-10">
-      Patient Zero
-    </h1>
+    <h1 class="text-6xl font-bold tracking-widest z-10">Patient Zero</h1>
 
     <!-- 副标题 -->
     <p class="mt-4 text-lg z-10 text-gray-300">2060 年 7 月 27 日</p>
@@ -53,7 +51,9 @@ function handleStartClick() {
 
     <!-- 底部信息 -->
     <span class="absolute bottom-3rem text-xs text-gray-500 z-10">
-      AdventureX 2025 · <p class="font-[JetbrainsMono] inline">wss://</p> team
+      AdventureX 2025 ·
+      <p class="font-[JetbrainsMono] inline">wss://</p>
+      team
     </span>
   </div>
 </template>

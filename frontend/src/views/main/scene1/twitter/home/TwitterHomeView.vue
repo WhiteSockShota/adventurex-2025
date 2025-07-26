@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Home, IconoirProvider, Mail } from '@iconoir/vue'
-import mocks from '../data/post.json'
+import { posts } from '../../../../../entity/Post.ts'
+import type { Post } from '../../../../../entity/Post.ts'
+
 import TwitterThread from './components/TwitterThread.vue'
 import { onMounted, onUnmounted, ref, type Ref } from 'vue'
 import { sleep } from '@/utils/async'
@@ -8,7 +10,6 @@ import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import Obserable from '@/components/Obserable.vue'
 import { useRouter } from 'vue-router'
-import type { Post } from '../types'
 import { useGameManager } from '@/stores/gameStore'
 import intro from '@/entity/audio/subtitles/intro.srt?raw'
 import introGlitch from '@/entity/audio/subtitles/intro-glitch.srt?raw'
@@ -22,16 +23,16 @@ const shakeFactor = ref(0)
 const gameManager = useGameManager()
 
 const glitchPost = {
-    "nickname": "???????",
-    "username": "@???",
-    "content": "你将被取消在这个世界存在的资格！新人类不是没有素质！",
-    "image": "",
-    "verified": false
+    nickname: '???????',
+    username: '@???',
+    content: '你将被取消在这个世界存在的资格！新人类不是没有素质！',
+    image: '',
+    verified: false,
 }
 
 const router = useRouter()
 
-const mockData: Ref<Post[]> = ref(mocks)
+const mockData: Ref<Post[]> = ref(posts)
 
 async function startShaking() {
     while (true) {

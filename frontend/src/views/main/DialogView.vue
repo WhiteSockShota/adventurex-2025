@@ -6,6 +6,9 @@ import { useRoute, useRouter } from 'vue-router';
 import gsap from 'gsap'
 import TextPlugin from 'gsap/TextPlugin';
 import { sleep } from '@/utils/async';
+import { parseSRT } from '@/entity/audio/subtitle';
+import mad from '@/entity/audio/subtitles/mad.srt?raw'
+import { PowerGlitch } from 'powerglitch';
 
 const gameManager = useGameManager()
 
@@ -20,16 +23,7 @@ const currentDialog = computed(() => {
 
 onMounted(async () => {
     await sleep(1000)
-    const timeline = gsap.timeline({
-        onComplete: () => {
-            const id = route.query.id
-            if (id != undefined) {
-                const dialogId = Number.parseInt(id.toString())
-                console.log(dialogId)
-                dialog.value = gameManager.getDialog(dialogId)
-            }
-        }
-    })
+    const timeline = gsap.timeline()
     timeline.to("#connect", {
         text: 'CONNECTED',
         duration: 0.5,
@@ -45,15 +39,39 @@ onMounted(async () => {
         duration: 0.5,
         ease: 'none'
     })
+
+    await timeline.then()
+    await sleep(1000)
+    loadDialog()
+
 })
+
+watch(() => route.query.id, async () => {
+    loadDialog()
+})
+
+function loadDialog() {
+    const id = route.query.id
+    if (id != undefined) {
+        const dialogId = Number.parseInt(id.toString())
+        console.log(dialogId)
+        dialog.value = gameManager.getDialog(dialogId)
+        currentDialogIndex.value = 0
+    }
+}
 
 onMounted(() => {
     gsap.registerPlugin(TextPlugin)
 })
 
 function nextDialog() {
+    console.log(currentDialog.value)
+    if (currentDialog.value.emit != undefined) {
+        const emit = currentDialog.value.emit
+        execEmit(emit)
+    }
     if (currentDialog.value.nextPage != undefined) {
-        router.push(currentDialog.value.nextPage)
+        router.push(decodeURI(currentDialog.value.nextPage))
     }
     if (currentDialog.value.options.length != 0) {
         const options = currentDialog.value.options
@@ -75,6 +93,33 @@ function nextDialog() {
         }
     }
     input.value = ''
+}
+
+function execEmit(emit: string) {
+    switch (emit) {
+        case 'play-mad':
+            gameManager.playSubtitle(parseSRT(mad))
+            break
+        case 'glitch':
+            PowerGlitch.glitch("#question", {
+                "timing": {
+                    "duration": 350
+                },
+                "glitchTimeSpan": {
+                    "start": 0,
+                    "end": 1
+                },
+                "shake": {
+                    "velocity": 30,
+                    "amplitudeX": 0.1
+                },
+                "slice": {
+                    "count": 30,
+                    "maxHeight": 0.01
+                }
+            })
+            break
+    }
 }
 
 function chooseOption(nextId: string) {
@@ -125,7 +170,9 @@ watch(currentDialog, async (newDialog, _) => {
                 <p class="m0" id="secLevel"></p>
                 <p class="m0" id="date"></p>
             </div>
-            <p ref="question" class="font-[JetbrainsMono,MiSans] text-1rem flex-[1] p2"></p>
+            <div class="font-[JetbrainsMono,MiSans] text-1rem flex-[1] p2">
+                <p ref="question" id="question"></p>
+            </div>
             <div class="flex items-center p2 border-t-solid">
                 <p class="promptArrow m0 text-1rem">></p>
                 <input type="text"

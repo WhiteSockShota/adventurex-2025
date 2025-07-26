@@ -12,7 +12,9 @@ import type { Post } from '../types'
 import { useGameManager } from '@/stores/gameStore'
 import intro from '@/entity/audio/subtitles/intro.srt?raw'
 import introGlitch from '@/entity/audio/subtitles/intro-glitch.srt?raw'
+import introDisqualify from '@/entity/audio/subtitles/intro-disqualify.srt?raw'
 import { parseSRT } from '@/entity/audio/subtitle'
+import { PowerGlitch } from 'powerglitch'
 
 const shakeOffset = ref(0)
 const shakeFactor = ref(0)
@@ -46,7 +48,7 @@ const mockCount = ref(0)
 
 onMounted(async () => {
     while (true) {
-        if (mockCount.value > 3) {
+        if (mockCount.value > 1) {
             const random = Math.random()
             if (random > 0.5) {
                 document.body.style.filter = 'invert(1)'
@@ -70,7 +72,6 @@ onUnmounted(() => {
 })
 
 async function appendMockData() {
-    mockData.value = mockData.value.concat(mocks)
     console.log(mockData.value.length)
     mockCount.value++
     shakeFactor.value = mockCount.value * 50
@@ -79,15 +80,17 @@ async function appendMockData() {
         for (let i = 0; i < 10; i++) {
             mockData.value.push(glitchPost)
         }
+        gameManager.playSubtitle(parseSRT(introDisqualify))
     }
-    if (mockCount.value > 4) {
+    if (mockCount.value > 3) {
         gsap.to('#container', {
             display: 'none',
         })
         document.body.style.filter = 'invert(0)'
         document.body.style.backgroundColor = 'white'
-        router.push('empty?to=' + encodeURI('/dialog?id=1'))
+        router.push('/empty?to=' + encodeURI('/dialog?id=1'))
     }
+    mockData.value = mockData.value.concat(mocks)
 }
 </script>
 

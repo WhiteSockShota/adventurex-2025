@@ -20,9 +20,9 @@ onMounted(() => {
       height: '2rem',
     }">
 
-      <router-view v-slot="{ Component, route }" class="w-screen h-screen">
+      <router-view v-slot="{ Component, route }" class="w-full h-full">
         <transition :name="route.meta.transition as string" class="w-screen h-screen" mode="out-in">
-          <component :is="Component" class="w-screen h-screen" />
+          <component :is="Component" class="w-full h-full" />
         </transition>
       </router-view>
 

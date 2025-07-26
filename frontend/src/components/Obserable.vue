@@ -8,7 +8,7 @@
 import { ref, onMounted, onUnmounted, defineEmits } from 'vue'
 
 const target = ref<HTMLElement | null>(null)
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: 'appear'): void
   (e: 'disappear'): void
 }>()
@@ -21,9 +21,9 @@ onMounted(() => {
   observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
-        emits('appear')
+        emit('appear')
       } else {
-        emits('disappear')
+        emit('disappear')
       }
     },
     {

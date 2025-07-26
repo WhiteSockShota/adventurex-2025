@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import { VueWinBox } from 'vue-winbox'
 import Browser from './Browser.vue'
 
 const count = ref(0)
@@ -33,23 +32,18 @@ function openApp(appName) {
   <div id="desktop" class="flex flex-col items-center justify-center h-screen relative">
     <!-- Dock -->
     <div
-      class="dock absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-4 bg-black/50 px-6 py-4 rounded-lg"
-    >
-      <div
-        v-for="app in apps"
-        :key="app.id"
-        class="dock-icon flex flex-col items-center cursor-pointer"
-        @click="app.action"
-      >
+      class="dock absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-4 bg-black/50 px-6 py-4 rounded-lg">
+      <div v-for="app in apps" :key="app.id" class="dock-icon flex flex-col items-center cursor-pointer"
+        @click="app.action">
         <div class="icon text-4xl">{{ app.icon }}</div>
         <div class="name text-sm mt-2 text-white">{{ app.name }}</div>
       </div>
     </div>
 
     <!-- WinBox -->
-    <VueWinBox ref="wbRef" :options="options">
+    <!-- <VueWinBox ref="wbRef" :options="options">
       <Browser url="/twitter"></Browser>
-    </VueWinBox>
+    </VueWinBox> -->
   </div>
 </template>
 

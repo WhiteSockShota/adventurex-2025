@@ -4,6 +4,7 @@ export interface Dialog {
   nextId: string | undefined
   nextPage: string | undefined
   id: string | undefined
+  emit: string | undefined
 }
 
 export interface Option {
@@ -20,6 +21,7 @@ export function createDialog(partial: Partial<Dialog>): Dialog {
     nextPage: partial.nextPage ?? undefined,
     nextId: partial.nextId ?? undefined,
     id: partial.id ?? undefined,
+    emit: partial.emit ?? undefined,
   }
 }
 

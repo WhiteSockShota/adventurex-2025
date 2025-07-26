@@ -32,99 +32,87 @@
 <script setup>
 import { useAudioEffects } from '@/utils/audioEffect'
 import { ref, onMounted, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { Terminal, Command, Cd, Ls, Cat, Touch, Mkdir, Rm, Zero } from '@/entity/terminal'
 
-// --- 组件状态 (Refs) ---
-const history = ref([]) // 存储历史记录 { type: 'input'/'output', text: '...' }
+// --- Component State ---
+const history = ref([])
 const currentInput = ref('')
-const inputRef = ref(null) // 对 <input> 元素的直接引用
-const terminalBody = ref(null) // 对终端主容器的引用，用于滚动
+const inputRef = ref(null)
+const terminalBody = ref(null)
+const route = useRoute()
+const router = useRouter()
 
-// --- 事件定义 ---
-const emit = defineEmits(['command'])
+const terminal = new Terminal()
+const commands = new Map()
 
-// --- 初始欢迎信息 ---
-const printWelcomeMessage = () => {
-  history.value.push({ type: 'output', text: 'Earth Federation Terminal [Version 3.1.5]' })
-  history.value.push({ type: 'output', text: '(c) 2050 OmniCorp. All rights reserved.' })
-  history.value.push({ type: 'output', text: '<br/>' }) // 添加空行
-  history.value.push({
-    type: 'output',
-    text: 'Connecting to Patient Zero... <span class="text-yellow-400">Done.</span>',
-  })
-  history.value.push({ type: 'output', text: 'Type `help` for a list of commands.' })
+const setupCommands = () => {
+  const commandInstances = [
+    new Cd(),
+    new Ls(),
+    new Cat(),
+    new Touch(),
+    new Mkdir(),
+    new Rm(),
+    new Zero(),
+  ]
+  commandInstances.forEach((cmd) => commands.set(cmd.name, cmd))
 }
 
-// --- 核心方法 ---
+// --- Initial Welcome Message ---
+const printWelcomeMessage = () => {
+  history.value.push({ type: 'output', text: 'Connecting to closedai.com...' })
+  history.value.push({ type: 'output', text: 'Connection established.' })
+  history.value.push({ type: 'output', text: 'root@4bt8rei9gvn4-zero.closedai.com $ _' })
+}
 
-// 聚焦到输入框
+// --- Core Methods ---
 const focusInput = () => {
   inputRef.value?.focus()
 }
 
-// 滚动到底部
 const scrollToBottom = async () => {
-  await nextTick() // 等待DOM更新
+  await nextTick()
   if (terminalBody.value) {
     terminalBody.value.scrollTop = terminalBody.value.scrollHeight
   }
 }
 
-// 处理用户输入的命令
 const handleCommand = async () => {
-  const command = currentInput.value.trim()
-  if (command === '') return
+  const commandLine = currentInput.value.trim()
+  if (commandLine === '') return
 
-  // 1. 将用户输入添加到历史记录
-  history.value.push({ type: 'input', text: command })
-
-  // 2. 清空输入框
+  history.value.push({ type: 'input', text: commandLine })
   currentInput.value = ''
 
-  // 3. 处理命令并获取输出
-  processCommand(command)
+  const [commandName, ...args] = commandLine.split(/\s+/)
+  processCommand(commandName, args)
 
-  // 4. 将命令发送给父组件
-  emit('command', command.toLowerCase())
-
-  // 5. 滚动到底部以显示新内容
   await scrollToBottom()
 }
 
-// 命令解析器 (游戏逻辑的核心)
-const processCommand = (command) => {
-  const cmd = command.toLowerCase()
+const processCommand = (commandName, args) => {
+  const command = commands.get(commandName.toLowerCase())
   let output = ''
 
-  switch (cmd) {
-    case 'help':
-      output = `Available commands:<br/>
-      <span class="text-cyan-400">help</span>   - Shows this help message.<br/>
-      <span class="text-cyan-400">clear</span>  - Clears the terminal screen.<br/>
-      <span class="text-cyan-400">whoami</span> - Displays current user.<br/>
-      <span class="text-cyan-400">date</span>   - Displays the current system date.<br/>
-      <span class="text-cyan-400">ping</span>   - Pings Patient Zero.`
-      break
-    case 'clear':
-      history.value = []
-      return // 直接返回，不添加输出
-    case 'whoami':
-      output = 'user: Dan'
-      break
-    case 'date':
-      output = new Date('2050-03-20T10:00:00Z').toUTCString()
-      break
-    case 'ping':
-      output = `Pinging Patient Zero...<br/>...<br/>...<br/><span class="text-red-500">ERROR: Connection timed out. Logic fragmented.</span>`
-      break
-    default:
-      output = `<span class="text-red-500">Command not found:</span> ${command}`
+  if (command) {
+    if (command.name === 'zero') {
+      router.push({ path: '/dialog', query: { id: route.query.dialog } })
+      return
+    }
+    output = command.execute({ terminal, args })
+  } else {
+    output = `<span class="text-red-500">Command not found:</span> ${commandName}`
   }
 
-  history.value.push({ type: 'output', text: output })
+  if (output) {
+    history.value.push({ type: 'output', text: output })
+  }
 }
 
-// --- 生命周期钩子 ---
+// --- Lifecycle Hooks ---
 onMounted(() => {
+  setupCommands()
   printWelcomeMessage()
   focusInput()
 })

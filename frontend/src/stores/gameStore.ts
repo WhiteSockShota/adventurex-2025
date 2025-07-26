@@ -1,3 +1,7 @@
+import { act6 } from './../entity/dialogs/act6'
+import { act5 } from './../entity/dialogs/act5'
+import { act4 } from './../entity/dialogs/act4'
+import { act3 } from './../entity/dialogs/act3'
 import type { Line, Subtitle } from '@/entity/audio/subtitle'
 import type { Dialog } from '@/entity/Dialog'
 import { help } from '@/entity/dialogs/help'
@@ -8,10 +12,13 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useGameManager = defineStore('gameManager', () => {
-  const dialogs = new Map([
+  const dialogs = new Map<number, Dialog[]>([
     [1, thankYou],
     [2, intro],
-    [3, help],
+    [3, act3],
+    [4, act4],
+    [5, act5],
+    [6, act6],
   ])
 
   var currentSubtitle: Subtitle | undefined = undefined

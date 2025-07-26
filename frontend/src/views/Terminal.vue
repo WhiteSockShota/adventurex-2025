@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { useAudioEffects } from '@/utils/audioEffect'
 import { ref, onMounted, nextTick, type Ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { Terminal, type Command, Cd, Ls, Cat, Touch, Mkdir, Rm, Zero, Pwd } from '@/entity/terminal'
 import { DeepSeekAI, type StreamChunk } from '@/services/deepseekAI'
 
@@ -50,6 +51,7 @@ const terminal = new Terminal()
 const commands = new Map()
 const deepseekAI = new DeepSeekAI()
 const isAITyping = ref(false)
+const router = useRouter()
 
 const setupCommands = () => {
   const commandInstances = [
@@ -149,6 +151,18 @@ const handleAIChat = async () => {
   try {
     let fullResponse = ''
     for await (const chunk of deepseekAI.sendMessageStream(userMessage)) {
+      if (chunk.tool_call) {
+        // AI decided to call the self-destruct tool
+        history.value[responseIndex].text =
+          'Zero: <span class="text-yellow-400">...正在执行...</span>'
+        await scrollToBottom()
+        // Simulate a delay for the "destruction"
+        setTimeout(() => {
+          router.push('/x')
+        }, 2000)
+        return
+      }
+
       if (chunk.error) {
         history.value[responseIndex].text =
           `<span class="text-red-400">Zero: ${chunk.content}</span>`

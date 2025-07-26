@@ -20,122 +20,122 @@ const router = useRouter()
 const dialog = ref<Dialog[]>([])
 const currentDialogIndex = ref(0)
 const currentDialog = computed(() => {
-  return dialog.value[currentDialogIndex.value]
+    return dialog.value[currentDialogIndex.value]
 })
 
 onMounted(async () => {
-  await sleep(1000)
-  const timeline = gsap.timeline()
-  timeline.to('#connect', {
-    text: 'CONNECTED',
-    duration: 0.5,
-    ease: 'none',
-  })
-  timeline.to('#secLevel', {
-    text: 'SEC_LEVEL: HIGH',
-    duration: 0.5,
-    ease: 'none',
-  })
-  timeline.to('#date', {
-    text: '20600727',
-    duration: 0.5,
-    ease: 'none',
-  })
+    await sleep(1000)
+    const timeline = gsap.timeline()
+    timeline.to('#connect', {
+        text: 'CONNECTED',
+        duration: 0.5,
+        ease: 'none',
+    })
+    timeline.to('#secLevel', {
+        text: 'SEC_LEVEL: HIGH',
+        duration: 0.5,
+        ease: 'none',
+    })
+    timeline.to('#date', {
+        text: '20600727',
+        duration: 0.5,
+        ease: 'none',
+    })
 
-  await timeline.then()
-  await sleep(1000)
-  loadDialog()
+    await timeline.then()
+    await sleep(1000)
+    loadDialog()
 })
 
 watch(
-  () => route.query.id,
-  async () => {
-    loadDialog()
-  },
+    () => route.query.id,
+    async () => {
+        loadDialog()
+    },
 )
 
 function loadDialog() {
-  const id = route.query.id
-  if (id != undefined) {
-    const dialogId = Number.parseInt(id.toString())
-    console.log(dialogId)
-    dialog.value = gameManager.getDialog(dialogId)
-    currentDialogIndex.value = 0
-  }
+    const id = route.query.id
+    if (id != undefined) {
+        const dialogId = Number.parseInt(id.toString())
+        console.log(dialogId)
+        dialog.value = gameManager.getDialog(dialogId)
+        currentDialogIndex.value = 0
+    }
 }
 
 onMounted(() => {
-  gsap.registerPlugin(TextPlugin)
+    gsap.registerPlugin(TextPlugin)
 })
 
 function nextDialog() {
-  console.log(currentDialog.value)
-  if (currentDialog.value.emit != undefined) {
-    const emit = currentDialog.value.emit
-    execEmit(emit)
-  }
-  if (currentDialog.value.nextPage != undefined) {
-    router.push(decodeURI(currentDialog.value.nextPage))
-  }
-  if (currentDialog.value.options.length != 0) {
-    const options = currentDialog.value.options
-    console.log('OPTIONS!', options)
-    if (options.map((option) => option.text).includes(input.value)) {
-      const selectedOption = input.value
-      console.log('OPTION SELECTED!', selectedOption)
-      const toId = options.find((option) => option.text == selectedOption)?.jumpToId ?? ''
-      chooseOption(toId)
+    console.log(currentDialog.value)
+    if (currentDialog.value.emit != undefined) {
+        const emit = currentDialog.value.emit
+        execEmit(emit)
     }
-  } else {
-    if (currentDialog.value.nextId == undefined || currentDialog.value.nextId?.length == 0) {
-      currentDialogIndex.value++
+    if (currentDialog.value.nextPage != undefined) {
+        router.push(decodeURI(currentDialog.value.nextPage))
+    }
+    if (currentDialog.value.options.length != 0) {
+        const options = currentDialog.value.options
+        console.log('OPTIONS!', options)
+        if (options.map((option) => option.text).includes(input.value)) {
+            const selectedOption = input.value
+            console.log('OPTION SELECTED!', selectedOption)
+            const toId = options.find((option) => option.text == selectedOption)?.jumpToId ?? ''
+            chooseOption(toId)
+        }
     } else {
-      const targetIndex = dialog.value.findIndex(
-        (dialog) => dialog.id == currentDialog.value.nextId,
-      )
-      currentDialogIndex.value = targetIndex
+        if (currentDialog.value.nextId == undefined || currentDialog.value.nextId?.length == 0) {
+            currentDialogIndex.value++
+        } else {
+            const targetIndex = dialog.value.findIndex(
+                (dialog) => dialog.id == currentDialog.value.nextId,
+            )
+            currentDialogIndex.value = targetIndex
+        }
     }
-  }
-  input.value = ''
+    input.value = ''
 }
 
 function execEmit(emit: string) {
-  switch (emit) {
-    case 'play-mad':
-      gameManager.playSubtitle(parseSRT(mad))
-      break
-    case 'glitch':
-      PowerGlitch.glitch('#question', {
-        timing: {
-          duration: 350,
-        },
-        glitchTimeSpan: {
-          start: 0,
-          end: 1,
-        },
-        shake: {
-          velocity: 30,
-          amplitudeX: 0.1,
-        },
-        slice: {
-          count: 30,
-          maxHeight: 0.01,
-        },
-      })
-      break
-    case 'play-whatever':
-      gameManager.playSubtitle(parseSRT(whatever))
-      break
-  }
+    switch (emit) {
+        case 'play-mad':
+            gameManager.playSubtitle(parseSRT(mad))
+            break
+        case 'glitch':
+            PowerGlitch.glitch('#question', {
+                timing: {
+                    duration: 350,
+                },
+                glitchTimeSpan: {
+                    start: 0,
+                    end: 1,
+                },
+                shake: {
+                    velocity: 30,
+                    amplitudeX: 0.1,
+                },
+                slice: {
+                    count: 30,
+                    maxHeight: 0.01,
+                },
+            })
+            break
+        case 'play-whatever':
+            gameManager.playSubtitle(parseSRT(whatever))
+            break
+    }
 }
 
 function chooseOption(nextId: string) {
-  const targetIndex = dialog.value.findIndex((dialog) => dialog.id == nextId)
-  console.log('TARGET INDEX!', targetIndex, nextId)
-  if (targetIndex >= 0) {
-    currentDialogIndex.value = targetIndex
-  }
-  console.log('TARGET DIALOG!', currentDialog)
+    const targetIndex = dialog.value.findIndex((dialog) => dialog.id == nextId)
+    console.log('TARGET INDEX!', targetIndex, nextId)
+    if (targetIndex >= 0) {
+        currentDialogIndex.value = targetIndex
+    }
+    console.log('TARGET DIALOG!', currentDialog)
 }
 
 const question = ref()
@@ -144,66 +144,64 @@ const input = ref('')
 const inputBar = ref()
 
 watch(
-  currentDialog,
-  async (newDialog, _) => {
-    console.log(newDialog)
-    if (question.value && newDialog) {
-      question.value.textContent = ''
+    currentDialog,
+    async (newDialog, _) => {
+        console.log(newDialog)
+        if (question.value && newDialog) {
+            question.value.textContent = ''
 
-      var newText =
-        newDialog.text +
-        '<br>' +
-        newDialog.options.map((option) => `选项：${option.text}`).join('<br>')
+            var newText =
+                newDialog.text +
+                '<br>' +
+                newDialog.options.map((option) => `选项：${option.text}`).join('<br>')
 
-      if (newDialog.options.length != 0) {
-        newText += '<br>在下方输入后按 ENTER 以选择'
-      } else {
-        newText += '<br>按 ENTER 继续'
-      }
+            if (newDialog.options.length != 0) {
+                newText += '<br>在下方输入后按 ENTER 以选择'
+            } else {
+                newText += '<br>按 ENTER 继续'
+            }
 
-      gsap.to(question.value, {
-        text: newText,
-        duration: newText.length * 0.1,
-        ease: 'none',
-        onUpdate: (self) => {
-          console.log('Typing sound', self)
-          const { playTypingSound } = useAudioEffects()
-          playTypingSound()
-        },
-      })
+            let lastTextLength = 0
+            gsap.to(question.value, {
+                text: newText,
+                duration: newText.length * 0.05,
+                ease: 'none',
+                onUpdate: () => {
+                    const currentText = question.value?.innerText ?? ''
+                    if (currentText.length > lastTextLength) {
+                        lastTextLength = currentText.length
+                        const { playTypingSound } = useAudioEffects()
+                        playTypingSound()
+                    }
+                },
+            })
 
-      inputBar.value.focus()
-    }
-  },
-  { immediate: true },
+            inputBar.value.focus()
+        }
+    },
+    { immediate: true },
 )
-</script>
+</script> mm
 
 <template>
-  <div
-    class="w-full max-h-full flex flex-col items-center justify-center bg-white font-[JetbrainsMono,MiSans]"
-  >
-    <button class="absolute top-0" @click="initializeAudio()">init</button>
+    <div class="w-full max-h-full flex flex-col items-center justify-center bg-white font-[JetbrainsMono,MiSans]">
+        <button class="absolute top-0" @click="initializeAudio()">init</button>
 
-    <div class="w-full max-h-full min-h-full flex flex-col color-white bg-black">
-      <div class="color-emerald text-1rem p2 flex items-center justify-between border-b-solid">
-        <p class="m0" id="connect"></p>
-        <p class="m0" id="secLevel"></p>
-        <p class="m0" id="date"></p>
-      </div>
-      <div class="font-[JetbrainsMono,MiSans] text-1rem flex-[1] p2" @click="inputBar.focus()">
-        <p ref="question" id="question"></p>
-      </div>
-      <div class="flex items-center p2 border-t-solid">
-        <p class="promptArrow m0 text-1rem">></p>
-        <input
-          type="text"
-          class="outline-none border-none font-[JetbrainsMono,MiSans] text-1rem bg-black color-white w-full"
-          @keydown.enter="nextDialog()"
-          v-model="input"
-          ref="inputBar"
-        />
-      </div>
+        <div class="w-full max-h-full min-h-full flex flex-col color-white bg-black">
+            <div class="color-emerald text-1rem p2 flex items-center justify-between border-b-solid">
+                <p class="m0" id="connect"></p>
+                <p class="m0" id="secLevel"></p>
+                <p class="m0" id="date"></p>
+            </div>
+            <div class="font-[JetbrainsMono,MiSans] text-1rem flex-[1] p2" @click="inputBar.focus()">
+                <p ref="question" id="question"></p>
+            </div>
+            <div class="flex items-center p2 border-t-solid">
+                <p class="promptArrow m0 text-1rem">></p>
+                <input type="text"
+                    class="outline-none border-none font-[JetbrainsMono,MiSans] text-1rem bg-black color-white w-full"
+                    @keydown.enter="nextDialog()" v-model="input" ref="inputBar" />
+            </div>
+        </div>
     </div>
-  </div>
 </template>

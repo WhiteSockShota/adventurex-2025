@@ -11,6 +11,7 @@ import DialogView from '@/views/main/DialogView.vue'
 import Zhihu from '@/views/Zhihu.vue'
 import WarningView from '@/views/main/warning/WarningView.vue'
 import PlainTextView from '@/views/PlainTextView.vue'
+import Terminal from '@/views/Terminal.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,6 +72,10 @@ const router = createRouter({
     {
       path: '/zhihu',
       component: Zhihu,
+    },
+    {
+      path: '/terminal',
+      component: Terminal,
     },
   ],
 })

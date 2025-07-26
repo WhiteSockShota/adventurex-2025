@@ -1,61 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, defineProps } from 'vue'
 
-const posts = ref([
-  {
-    id: 1,
-    author: '战地观察员',
-    avatar: 'https://picsum.photos/seed/user1/80/80',
-    time: '2小时前',
-    title: '泰国与柬埔寨在两国边境地区发生交火，背后有哪些原因？目前情况如何？',
-    content:
-      '据前线报道，交火主要集中在柏威夏寺附近区域。双方均动用了重型武器，目前已造成数十人伤亡。国际社会呼吁双方保持克制，通过外交途径解决争端。历史上，两国在边境划分上一直存在争议，特别是围绕柏威夏寺的归属问题...',
-    imageUrl: 'https://picsum.photos/seed/border_conflict/400/250',
-    likes: '1.2k',
-    comments: 345,
-    tags: ['国际关系', '东南亚', '边境冲突'],
-  },
-  {
-    id: 2,
-    author: '疾控科普君',
-    avatar: 'https://picsum.photos/seed/user2/80/80',
-    time: '4小时前',
-    title: '广东顺德基孔肯雅热病例接近三千，已外溢至省外，为什么传播这么快？有哪些症状？如何预防？',
-    content:
-      '基孔肯雅热通过伊蚊叮咬传播，近期华南地区持续高温高湿，为蚊虫滋生提供了温床。加上暑期人员流动频繁，导致疫情快速扩散。典型症状包括急性发热、关节疼痛、皮疹等。预防措施主要是防蚊灭蚊，清除积水，使用防蚊用品...',
-    imageUrl: null,
-    likes: '874',
-    comments: 112,
-    tags: ['医学', '公共卫生', '疾病预防'],
-  },
-  {
-    id: 3,
-    author: '航空物语',
-    avatar: 'https://picsum.photos/seed/user3/80/80',
-    time: '6小时前',
-    title:
-      '7月24日一架搭载49人俄客机坠毁无人生还，失事原因可能为能见度差、操作失误，具体情况如何？',
-    content:
-      '失事客机型号为安-24，隶属于安加拉航空公司。飞机在伊尔库茨克州执行降落时撞向地面。初步调查显示，事发时机场有浓雾，能见度极低。黑匣子已找到，正在进行数据分析。这起事故再次提醒我们航空安全的重要性...',
-    imageUrl: 'https://picsum.photos/seed/plane_crash/400/250',
-    likes: '4.5k',
-    comments: 1100,
-    tags: ['航空', '安全事故', '俄罗斯'],
-  },
-  {
-    id: 4,
-    author: '科技前沿观察',
-    avatar: 'https://picsum.photos/seed/user4/80/80',
-    time: '8小时前',
-    title: 'ChatGPT推出代码解释器功能，对程序员工作会产生什么影响？',
-    content:
-      'OpenAI最新发布的代码解释器功能可以直接运行Python代码，分析数据，生成图表。这一功能的推出引发了程序员群体的广泛讨论。有人认为这会提高开发效率，也有人担心会影响就业。从技术角度来看，这确实是一个重大突破...',
-    imageUrl: 'https://picsum.photos/seed/ai_code/400/250',
-    likes: '2.8k',
-    comments: 567,
-    tags: ['人工智能', 'ChatGPT', '编程'],
-  },
-])
+const props = defineProps({
+  posts: {
+    type: Array,
+    required: true,
+    default: () => []
+  }
+});
 
 const hotTopics = ref([
   { id: 1, title: '成都大运会开幕式', heat: '1234万' },

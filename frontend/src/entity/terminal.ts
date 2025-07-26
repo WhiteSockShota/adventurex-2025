@@ -30,7 +30,7 @@ export class Terminal {
   }
 }
 
-class File {
+export class File {
   private content: string
   public readonly name: string
 
@@ -48,7 +48,7 @@ class File {
   }
 }
 
-class Directory {
+export class Directory {
   private children: Record<string, File | Directory>
   public readonly name: string
 
@@ -86,7 +86,7 @@ export interface Command {
 
 type Args = Record<string, string | number | boolean>
 
-class Cd implements Command {
+export class Cd implements Command {
   name = 'cd'
   execute({ terminal, args }: CommandContext): string {
     const targetName = args[0]
@@ -110,7 +110,7 @@ class Cd implements Command {
   }
 }
 
-class Ls implements Command {
+export class Ls implements Command {
   name = 'ls'
   execute({ terminal, args }: CommandContext): string {
     if (args[0] === '-l') {
@@ -121,7 +121,7 @@ class Ls implements Command {
   }
 }
 
-class Cat implements Command {
+export class Cat implements Command {
   name = 'cat'
 
   execute({ terminal, args }: CommandContext): string {
@@ -138,7 +138,7 @@ class Cat implements Command {
   }
 }
 
-class Touch implements Command {
+export class Touch implements Command {
   name = 'touch'
 
   execute({ terminal, args }: CommandContext): string {
@@ -151,7 +151,7 @@ class Touch implements Command {
   }
 }
 
-class Mkdir implements Command {
+export class Mkdir implements Command {
   name = 'mkdir'
 
   execute({ terminal, args }: CommandContext): string {
@@ -164,7 +164,7 @@ class Mkdir implements Command {
   }
 }
 
-class Rm implements Command {
+export class Rm implements Command {
   name = 'rm'
 
   execute({ terminal, args }: CommandContext): string {
@@ -178,7 +178,7 @@ class Rm implements Command {
 }
 
 // Patient Zero AI (boss)
-class Zero implements Command {
+export class Zero implements Command {
   name = 'zero'
   execute(context: CommandContext): string {
     // The complex dialog logic will be handled in the UI component

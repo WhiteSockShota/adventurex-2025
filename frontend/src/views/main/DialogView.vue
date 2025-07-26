@@ -181,7 +181,7 @@ watch(
     },
     { immediate: true },
 )
-</script> mm
+</script>
 
 <template>
     <div class="w-full max-h-full flex flex-col items-center justify-center bg-white font-[JetbrainsMono,MiSans]">

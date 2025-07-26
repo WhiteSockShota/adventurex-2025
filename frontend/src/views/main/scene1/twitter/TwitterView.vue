@@ -31,10 +31,8 @@ import FakeNavButton from './home/components/FakeNavButton.vue';
             </div>
         </div>
 
-        <div class="w-50% h-full border-black/20 border-[0.05px] border-x-solid">
-
+        <div class="flex-1 h-full border-black/20 border-[0.05px] border-x-solid">
             <RouterView></RouterView>
-
         </div>
 
         <div class="w-25% h-full">

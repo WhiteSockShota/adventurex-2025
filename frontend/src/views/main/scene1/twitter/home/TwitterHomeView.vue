@@ -9,10 +9,15 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import Obserable from '@/components/Obserable.vue'
 import { useRouter } from 'vue-router'
 import type { Post } from '../types'
+import { useGameManager } from '@/stores/gameStore'
+import intro from '@/entity/audio/subtitles/intro.srt?raw'
+import introGlitch from '@/entity/audio/subtitles/intro-glitch.srt?raw'
+import { parseSRT } from '@/entity/audio/subtitle'
 
 const shakeOffset = ref(0)
 const shakeFactor = ref(0)
 
+const gameManager = useGameManager()
 
 const glitchPost = {
     "nickname": "???????",
@@ -39,32 +44,55 @@ onMounted(() => {
 
 const mockCount = ref(0)
 
+onMounted(async () => {
+    while (true) {
+        if (mockCount.value > 3) {
+            const random = Math.random()
+            if (random > 0.5) {
+                document.body.style.filter = 'invert(1)'
+                document.body.style.background = 'black'
+            }
+            else {
+                document.body.style.filter = 'invert(0)'
+                document.body.style.background = 'white'
+            }
+        }
+        await sleep(40)
+    }
+})
+
+onMounted(() => {
+    gameManager.playSubtitle(parseSRT(intro))
+})
+
+onUnmounted(() => {
+    mockCount.value = 0
+})
+
 async function appendMockData() {
     mockData.value = mockData.value.concat(mocks)
     console.log(mockData.value.length)
     mockCount.value++
     shakeFactor.value = mockCount.value * 50
+    if (mockCount.value == 1) gameManager.playSubtitle(parseSRT(introGlitch))
     if (mockCount.value > 2) {
         for (let i = 0; i < 10; i++) {
             mockData.value.push(glitchPost)
         }
-    }
-    if (mockCount.value > 3) {
-        document.body.style.filter = 'invert(1)'
-        document.body.style.backgroundColor = 'black'
     }
     if (mockCount.value > 4) {
         gsap.to('#container', {
             display: 'none',
         })
         document.body.style.filter = 'invert(0)'
+        document.body.style.backgroundColor = 'white'
         router.push('empty?to=' + encodeURI('/dialog?id=1'))
     }
 }
 </script>
 
 <template>
-    <div class="min-w-full max-h-full overflow-y-auto" :style="{
+    <div class="max-w-full max-h-full overflow-y-auto" :style="{
         transform: `translateX(${shakeOffset * Math.random()}px) translateY(${shakeOffset * Math.random()}px)`,
     }" id="container">
         <IconoirProvider :icon-props="{
@@ -72,7 +100,7 @@ async function appendMockData() {
             'stroke-width': 2,
             width: '1em',
             height: '1em',
-        }" class="w-full">
+        }" class="max-w-full">
             <div id="container">
                 <TwitterThread v-for="mock in mockData" :content="mock.content" :nickname="mock.nickname"
                     :username="mock.username" class="w-full"

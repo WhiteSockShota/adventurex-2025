@@ -8,12 +8,36 @@ const router = useRouter()
 
 const text = ref()
 
+const isFlashing = ref(false)
+
 onMounted(async () => {
     const path = decodeURI(route.query.to?.toString() ?? '')
+    const flashing = route.query.flashing
+    isFlashing.value = flashing === undefined ? true : flashing === 'true'
     await sleep(3000)
     text.value.style.display = 'none'
+    isFlashing.value = false
     await sleep(2000)
+    document.body.style.filter = 'invert(0)'
+    document.body.style.backgroundColor = 'white'
     router.push(path)
+})
+
+onMounted(async () => {
+    while (true) {
+        if (isFlashing.value) {
+            const random = Math.random()
+            if (random > 0.5) {
+                document.body.style.filter = 'invert(1)'
+                document.body.style.backgroundColor = 'black'
+            }
+            else {
+                document.body.style.filter = 'invert(0)'
+                document.body.style.backgroundColor = 'white'
+            }
+        }
+        await sleep(40)
+    }
 })
 
 </script>

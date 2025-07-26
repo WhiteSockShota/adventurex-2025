@@ -2,6 +2,7 @@ export interface Dialog {
   text: string
   options: Option[]
   nextId: string | undefined
+  nextPage: string | undefined
   id: string | undefined
 }
 
@@ -16,6 +17,7 @@ export function createDialog(partial: Partial<Dialog>): Dialog {
   return {
     text: partial.text ?? '',
     options: partial.options ?? [],
+    nextPage: partial.nextPage ?? undefined,
     nextId: partial.nextId ?? undefined,
     id: partial.id ?? undefined,
   }

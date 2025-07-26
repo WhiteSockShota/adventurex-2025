@@ -2,7 +2,7 @@
 import type { Dialog } from '@/entity/Dialog';
 import { useGameManager } from '@/stores/gameStore';
 import { computed, onMounted, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import gsap from 'gsap'
 import TextPlugin from 'gsap/TextPlugin';
 import { sleep } from '@/utils/async';
@@ -10,6 +10,7 @@ import { sleep } from '@/utils/async';
 const gameManager = useGameManager()
 
 const route = useRoute()
+const router = useRouter()
 
 const dialog = ref<Dialog[]>([])
 const currentDialogIndex = ref(0)
@@ -18,13 +19,32 @@ const currentDialog = computed(() => {
 })
 
 onMounted(async () => {
-    const id = route.query.id
-    if (id != undefined) {
-        await sleep(2000)
-        const dialogId = Number.parseInt(id.toString())
-        console.log(dialogId)
-        dialog.value = gameManager.getDialog(dialogId)
-    }
+    await sleep(1000)
+    const timeline = gsap.timeline({
+        onComplete: () => {
+            const id = route.query.id
+            if (id != undefined) {
+                const dialogId = Number.parseInt(id.toString())
+                console.log(dialogId)
+                dialog.value = gameManager.getDialog(dialogId)
+            }
+        }
+    })
+    timeline.to("#connect", {
+        text: 'CONNECTED',
+        duration: 0.5,
+        ease: 'none'
+    })
+    timeline.to("#secLevel", {
+        text: 'SEC_LEVEL: HIGH',
+        duration: 0.5,
+        ease: 'none'
+    })
+    timeline.to("#date", {
+        text: '20600727',
+        duration: 0.5,
+        ease: 'none'
+    })
 })
 
 onMounted(() => {
@@ -32,6 +52,9 @@ onMounted(() => {
 })
 
 function nextDialog() {
+    if (currentDialog.value.nextPage != undefined) {
+        router.push(currentDialog.value.nextPage)
+    }
     if (currentDialog.value.options.length != 0) {
         const options = currentDialog.value.options
         console.log('OPTIONS!', options)
@@ -97,13 +120,13 @@ watch(currentDialog, async (newDialog, _) => {
 <template>
     <div class="w-full max-h-full flex flex-col items-center justify-center bg-white font-[JetbrainsMono,MiSans]">
         <div class="w-full max-h-full min-h-full flex flex-col color-white bg-black">
-            <div class="color-emerald text-1rem p flex items-center justify-between border-b-solid">
-                <p class="m0">CONNECTED</p>
-                <p class="m0">SEC_LEVEL: HIGH</p>
-                <p class="m0">2060-7-25</p>
+            <div class="color-emerald text-1rem p2 flex items-center justify-between border-b-solid">
+                <p class="m0" id="connect"></p>
+                <p class="m0" id="secLevel"></p>
+                <p class="m0" id="date"></p>
             </div>
-            <p ref="question" class="font-[JetbrainsMono,MiSans] text-1rem flex-[1] m"></p>
-            <div class="flex items-center p border-t-solid">
+            <p ref="question" class="font-[JetbrainsMono,MiSans] text-1rem flex-[1] p2"></p>
+            <div class="flex items-center p2 border-t-solid">
                 <p class="promptArrow m0 text-1rem">></p>
                 <input type="text"
                     class="outline-none border-none font-[JetbrainsMono,MiSans] text-1rem bg-black color-white w-full"

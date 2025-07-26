@@ -1,361 +1,4 @@
-<template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 font-sans">
-    <!-- Header -->
-    <header
-      class="bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-50 border-b border-gray-200 dark:border-slate-700"
-    >
-      <div class="container mx-auto px-4">
-        <div class="flex items-center justify-between h-16">
-          <!-- Left Section -->
-          <div class="flex items-center space-x-8">
-            <!-- 知乎 Logo -->
-            <div class="flex items-center space-x-2">
-              <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">
-                <span class="text-white font-bold text-lg">知</span>
-              </div>
-              <span class="text-xl font-bold text-gray-800 dark:text-gray-100">知乎</span>
-            </div>
-            <nav class="hidden md:flex items-center space-x-6 text-gray-600 dark:text-gray-300">
-              <a href="#" class="text-blue-500 font-medium border-b-2 border-blue-500 pb-4 -mb-4"
-                >首页</a
-              >
-              <a href="#" class="hover:text-blue-500 transition-colors">会员</a>
-              <a href="#" class="hover:text-blue-500 transition-colors">发现</a>
-              <a href="#" class="hover:text-blue-500 transition-colors">等你来答</a>
-            </nav>
-          </div>
-
-          <!-- Center Section: Search -->
-          <div class="flex-1 max-w-lg mx-8 hidden lg:block">
-            <div class="relative">
-              <input
-                type="text"
-                placeholder="搜索你感兴趣的内容..."
-                class="w-full bg-gray-100 dark:bg-slate-700 border-0 rounded-full py-2.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-600 transition-all"
-              />
-              <svg
-                class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </div>
-          </div>
-
-          <!-- Right Section -->
-          <div class="flex items-center space-x-4">
-            <button
-              class="px-6 py-2 text-sm font-medium text-white bg-blue-500 rounded-full hover:bg-blue-600 transition-colors hidden sm:block"
-            >
-              提问
-            </button>
-            <div class="flex items-center space-x-3 text-gray-500 dark:text-gray-400">
-              <div class="relative cursor-pointer">
-                <svg
-                  class="h-6 w-6 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                  />
-                </svg>
-                <span
-                  class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 min-w-5 text-center"
-                  >3</span
-                >
-              </div>
-              <div class="relative cursor-pointer">
-                <svg
-                  class="h-6 w-6 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                  />
-                </svg>
-              </div>
-              <img
-                src="https://picsum.photos/seed/avatar/40/40"
-                alt="Avatar"
-                class="h-8 w-8 rounded-full cursor-pointer border-2 border-transparent hover:border-blue-200 transition-colors"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 pt-6 max-w-7xl">
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        <!-- Left Column: Feed -->
-        <div class="lg:col-span-3 space-y-4">
-          <!-- Tab Navigation -->
-          <div
-            class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700"
-          >
-            <div class="flex items-center px-6 py-4 border-b border-gray-100 dark:border-slate-700">
-              <a
-                href="#"
-                class="px-4 py-2 font-medium text-blue-500 border-b-2 border-blue-500 -mb-4"
-                >推荐</a
-              >
-              <a
-                href="#"
-                class="px-4 py-2 font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
-                >热榜</a
-              >
-              <a
-                href="#"
-                class="px-4 py-2 font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
-                >关注</a
-              >
-            </div>
-
-            <!-- Posts -->
-            <div class="divide-y divide-gray-100 dark:divide-slate-700">
-              <article
-                v-for="post in posts"
-                :key="post.id"
-                class="p-6 hover:bg-gray-50 dark:hover:bg-slate-750 transition-colors"
-              >
-                <div class="flex items-start space-x-4">
-                  <!-- Avatar -->
-                  <img
-                    :src="post.avatar"
-                    alt="Author avatar"
-                    class="w-10 h-10 rounded-full flex-shrink-0 mt-1"
-                  />
-
-                  <div class="flex-1 min-w-0">
-                    <!-- Author info -->
-                    <div class="flex items-center space-x-2 mb-2">
-                      <span class="font-medium text-gray-900 dark:text-gray-100">{{
-                        post.author
-                      }}</span>
-                      <span class="text-gray-400 text-sm">{{ post.time }}</span>
-                    </div>
-
-                    <!-- Title -->
-                    <h2
-                      class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 hover:text-blue-600 cursor-pointer line-clamp-2"
-                    >
-                      {{ post.title }}
-                    </h2>
-
-                    <!-- Content with image -->
-                    <div class="flex space-x-4 mb-4">
-                      <div class="flex-1">
-                        <p
-                          class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed line-clamp-3"
-                        >
-                          {{ post.content }}
-                        </p>
-                      </div>
-                      <img
-                        v-if="post.imageUrl"
-                        :src="post.imageUrl"
-                        alt="Post image"
-                        class="w-32 h-20 object-cover rounded-lg flex-shrink-0"
-                      />
-                    </div>
-
-                    <!-- Tags -->
-                    <div class="flex flex-wrap gap-2 mb-4" v-if="post.tags">
-                      <span
-                        v-for="tag in post.tags"
-                        :key="tag"
-                        class="px-2 py-1 text-xs bg-blue-50 text-blue-600 rounded-full"
-                      >
-                        {{ tag }}
-                      </span>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="flex items-center justify-between">
-                      <div class="flex items-center space-x-6">
-                        <button
-                          class="flex items-center space-x-1 text-gray-500 hover:text-blue-600 transition-colors"
-                        >
-                          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 4L4 14h6v6h4v-6h6z" />
-                          </svg>
-                          <span class="text-sm">赞同 {{ post.likes }}</span>
-                        </button>
-                        <button
-                          class="flex items-center space-x-1 text-gray-500 hover:text-blue-600 transition-colors"
-                        >
-                          <svg
-                            class="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                            />
-                          </svg>
-                          <span class="text-sm">{{ post.comments }} 条评论</span>
-                        </button>
-                        <button
-                          class="flex items-center space-x-1 text-gray-500 hover:text-red-500 transition-colors"
-                        >
-                          <svg
-                            class="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                            />
-                          </svg>
-                          <span class="text-sm">收藏</span>
-                        </button>
-                      </div>
-                      <button class="text-gray-400 hover:text-gray-600 transition-colors">
-                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column: Sidebar -->
-        <div class="lg:col-span-1 space-y-4">
-          <!-- Creator Center -->
-          <div
-            class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4"
-          >
-            <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-4">创作中心</h3>
-            <div class="grid grid-cols-2 gap-4 text-center mb-4">
-              <div>
-                <p class="text-2xl font-bold text-orange-500">127</p>
-                <p class="text-xs text-gray-500 dark:text-gray-400">今日阅读</p>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-red-500">23</p>
-                <p class="text-xs text-gray-500 dark:text-gray-400">今日新增赞同</p>
-              </div>
-            </div>
-            <button
-              class="w-full bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-medium py-2.5 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors"
-            >
-              进入创作中心
-            </button>
-          </div>
-
-          <!-- Hot Topics -->
-          <div
-            class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4"
-          >
-            <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-4">热门话题</h3>
-            <div class="space-y-3">
-              <div
-                v-for="topic in hotTopics"
-                :key="topic.id"
-                class="flex items-center justify-between p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-lg cursor-pointer transition-colors"
-              >
-                <div>
-                  <p class="font-medium text-sm text-gray-800 dark:text-gray-200">
-                    {{ topic.title }}
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">{{ topic.heat }} 热度</p>
-                </div>
-                <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Circles -->
-          <div
-            class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4"
-          >
-            <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-4">推荐圈子</h3>
-            <div class="space-y-4">
-              <div
-                v-for="circle in circles"
-                :key="circle.id"
-                class="flex items-center justify-between"
-              >
-                <div class="flex items-center space-x-3">
-                  <img :src="circle.avatar" :alt="circle.name" class="w-10 h-10 rounded-lg" />
-                  <div>
-                    <p class="font-medium text-sm text-gray-800 dark:text-gray-200">
-                      {{ circle.name }}
-                    </p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">
-                      {{ circle.members }} 成员 · {{ circle.posts }} 内容
-                    </p>
-                  </div>
-                </div>
-                <button
-                  class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-1.5 text-xs font-medium rounded-full transition-colors"
-                >
-                  + 加入
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Footer Links -->
-          <div
-            class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4"
-          >
-            <div class="text-xs text-gray-500 dark:text-gray-400 space-y-2">
-              <div class="flex flex-wrap gap-2">
-                <a href="#" class="hover:text-blue-500">关于知乎</a>
-                <a href="#" class="hover:text-blue-500">用户协议</a>
-                <a href="#" class="hover:text-blue-500">隐私保护</a>
-              </div>
-              <div class="flex flex-wrap gap-2">
-                <a href="#" class="hover:text-blue-500">侵权举报</a>
-                <a href="#" class="hover:text-blue-500">网上有害信息举报</a>
-              </div>
-              <p class="pt-2 border-t border-gray-100 dark:border-slate-700">© 2023 知乎</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-</template>
-
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
 const posts = ref([
@@ -447,6 +90,252 @@ const circles = ref([
 ])
 </script>
 
+<template>
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 font-sans">
+    <!-- Header -->
+    <header
+      class="bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-50 border-b border-gray-200 dark:border-slate-700">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <!-- Left Section -->
+          <div class="flex items-center space-x-8">
+            <!-- 知乎 Logo -->
+            <div class="flex items-center space-x-2">
+              <div class="w-8 h-8 bg-blue-500 rounded flex items-center justify-center">
+                <span class="text-white font-bold text-lg">知</span>
+              </div>
+              <span class="text-xl font-bold text-gray-800 dark:text-gray-100">知乎</span>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-gray-600 dark:text-gray-300">
+              <a href="#" class="text-blue-500 font-medium border-b-2 border-blue-500 pb-4 -mb-4">首页</a>
+              <a href="#" class="hover:text-blue-500 transition-colors">会员</a>
+              <a href="#" class="hover:text-blue-500 transition-colors">发现</a>
+              <a href="#" class="hover:text-blue-500 transition-colors">等你来答</a>
+            </nav>
+          </div>
+
+          <!-- Center Section: Search -->
+          <div class="flex-1 max-w-lg mx-8 hidden lg:block">
+            <div class="relative">
+              <input type="text" placeholder="搜索你感兴趣的内容..."
+                class="w-full bg-gray-100 dark:bg-slate-700 border-0 rounded-full py-2.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white dark:focus:bg-slate-600 transition-all" />
+              <svg class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Right Section -->
+          <div class="flex items-center space-x-4">
+            <button
+              class="px-6 py-2 text-sm font-medium text-white bg-blue-500 rounded-full hover:bg-blue-600 transition-colors hidden sm:block">
+              提问
+            </button>
+            <div class="flex items-center space-x-3 text-gray-500 dark:text-gray-400">
+              <div class="relative cursor-pointer">
+                <svg class="h-6 w-6 hover:text-gray-700 dark:hover:text-gray-300 transition-colors" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+                <span
+                  class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 min-w-5 text-center">3</span>
+              </div>
+              <div class="relative cursor-pointer">
+                <svg class="h-6 w-6 hover:text-gray-700 dark:hover:text-gray-300 transition-colors" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <img src="https://picsum.photos/seed/avatar/40/40" alt="Avatar"
+                class="h-8 w-8 rounded-full cursor-pointer border-2 border-transparent hover:border-blue-200 transition-colors" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-6 max-w-7xl">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- Left Column: Feed -->
+        <div class="lg:col-span-3 space-y-4">
+          <!-- Tab Navigation -->
+          <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700">
+            <div class="flex items-center px-6 py-4 border-b border-gray-100 dark:border-slate-700">
+              <a href="#" class="px-4 py-2 font-medium text-blue-500 border-b-2 border-blue-500 -mb-4">推荐</a>
+              <a href="#"
+                class="px-4 py-2 font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors">热榜</a>
+              <a href="#"
+                class="px-4 py-2 font-medium text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors">关注</a>
+            </div>
+
+            <!-- Posts -->
+            <div class="divide-y divide-gray-100 dark:divide-slate-700">
+              <article v-for="post in posts" :key="post.id"
+                class="p-6 hover:bg-gray-50 dark:hover:bg-slate-750 transition-colors">
+                <div class="flex items-start space-x-4">
+                  <!-- Avatar -->
+                  <img :src="post.avatar" alt="Author avatar" class="w-10 h-10 rounded-full flex-shrink-0 mt-1" />
+
+                  <div class="flex-1 min-w-0">
+                    <!-- Author info -->
+                    <div class="flex items-center space-x-2 mb-2">
+                      <span class="font-medium text-gray-900 dark:text-gray-100">{{
+                        post.author
+                        }}</span>
+                      <span class="text-gray-400 text-sm">{{ post.time }}</span>
+                    </div>
+
+                    <!-- Title -->
+                    <h2
+                      class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 hover:text-blue-600 cursor-pointer line-clamp-2">
+                      {{ post.title }}
+                    </h2>
+
+                    <!-- Content with image -->
+                    <div class="flex space-x-4 mb-4">
+                      <div class="flex-1">
+                        <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed line-clamp-3">
+                          {{ post.content }}
+                        </p>
+                      </div>
+                      <img v-if="post.imageUrl" :src="post.imageUrl" alt="Post image"
+                        class="w-32 h-20 object-cover rounded-lg flex-shrink-0" />
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-2 mb-4" v-if="post.tags">
+                      <span v-for="tag in post.tags" :key="tag"
+                        class="px-2 py-1 text-xs bg-blue-50 text-blue-600 rounded-full">
+                        {{ tag }}
+                      </span>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center space-x-6">
+                        <button class="flex items-center space-x-1 text-gray-500 hover:text-blue-600 transition-colors">
+                          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 4L4 14h6v6h4v-6h6z" />
+                          </svg>
+                          <span class="text-sm">赞同 {{ post.likes }}</span>
+                        </button>
+                        <button class="flex items-center space-x-1 text-gray-500 hover:text-blue-600 transition-colors">
+                          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                          </svg>
+                          <span class="text-sm">{{ post.comments }} 条评论</span>
+                        </button>
+                        <button class="flex items-center space-x-1 text-gray-500 hover:text-red-500 transition-colors">
+                          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                          </svg>
+                          <span class="text-sm">收藏</span>
+                        </button>
+                      </div>
+                      <button class="text-gray-400 hover:text-gray-600 transition-colors">
+                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Sidebar -->
+        <div class="lg:col-span-1 space-y-4">
+          <!-- Creator Center -->
+          <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4">
+            <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-4">创作中心</h3>
+            <div class="grid grid-cols-2 gap-4 text-center mb-4">
+              <div>
+                <p class="text-2xl font-bold text-orange-500">127</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">今日阅读</p>
+              </div>
+              <div>
+                <p class="text-2xl font-bold text-red-500">23</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">今日新增赞同</p>
+              </div>
+            </div>
+            <button
+              class="w-full bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400 font-medium py-2.5 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition-colors">
+              进入创作中心
+            </button>
+          </div>
+
+          <!-- Hot Topics -->
+          <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4">
+            <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-4">热门话题</h3>
+            <div class="space-y-3">
+              <div v-for="topic in hotTopics" :key="topic.id"
+                class="flex items-center justify-between p-2 hover:bg-gray-50 dark:hover:bg-slate-700 rounded-lg cursor-pointer transition-colors">
+                <div>
+                  <p class="font-medium text-sm text-gray-800 dark:text-gray-200">
+                    {{ topic.title }}
+                  </p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">{{ topic.heat }} 热度</p>
+                </div>
+                <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Circles -->
+          <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4">
+            <h3 class="font-semibold text-gray-800 dark:text-gray-200 mb-4">推荐圈子</h3>
+            <div class="space-y-4">
+              <div v-for="circle in circles" :key="circle.id" class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <img :src="circle.avatar" :alt="circle.name" class="w-10 h-10 rounded-lg" />
+                  <div>
+                    <p class="font-medium text-sm text-gray-800 dark:text-gray-200">
+                      {{ circle.name }}
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                      {{ circle.members }} 成员 · {{ circle.posts }} 内容
+                    </p>
+                  </div>
+                </div>
+                <button
+                  class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-1.5 text-xs font-medium rounded-full transition-colors">
+                  + 加入
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Links -->
+          <div class="bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 p-4">
+            <div class="text-xs text-gray-500 dark:text-gray-400 space-y-2">
+              <div class="flex flex-wrap gap-2">
+                <a href="#" class="hover:text-blue-500">关于知乎</a>
+                <a href="#" class="hover:text-blue-500">用户协议</a>
+                <a href="#" class="hover:text-blue-500">隐私保护</a>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <a href="#" class="hover:text-blue-500">侵权举报</a>
+                <a href="#" class="hover:text-blue-500">网上有害信息举报</a>
+              </div>
+              <p class="pt-2 border-t border-gray-100 dark:border-slate-700">© 2023 知乎</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
+
 <style scoped>
 .font-sans {
   font-family:
@@ -457,6 +346,7 @@ const circles = ref([
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -464,6 +354,7 @@ const circles = ref([
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

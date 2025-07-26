@@ -48,12 +48,14 @@ onMounted(async () => {
                 <div class="flex items-center text-sm text-gray-500">
                     <span class="font-medium text-black text-1rem me-2">{{
                         randomString(param, nickname ?? '')
-                    }}</span>
+                        }}</span>
                     <span>{{ randomString(param, username ?? '') }}</span>
                     <span class="mx-1">·</span>
                     <span>2h</span>
                 </div>
-                <div class="mt-1 text-base w-full text-black break-words">
+                <div class="mt-1 text-base w-full text-black break-words" :style="{
+                    color: username == '@???' ? 'red' : 'black'
+                }">
                     {{ randomString(param, content ?? '') }}
                 </div>
                 <div class="flex gap-8 opacity-50 w-full text-sm mt-2">

@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import Tip from '../Tip.ts';
 import { useAudioStore } from '@/stores/audioStore';
 import { useGameManager } from '@/stores/gameStore';
 import { onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
+import { useToast } from 'vue-toastification';
 
 const gameManager = useGameManager()
 const audioStore = useAudioStore()
@@ -22,6 +24,9 @@ function handleStartClick() {
     router.push('/warning?next=' + nextUrl)
   }
 }
+
+const tip = new Tip("Test", "Test tip")
+tip.show()
 </script>
 
 <!-- src/components/StartScreen.vue -->

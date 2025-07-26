@@ -1,6 +1,5 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
-import Browser from './Browser.vue'
 
 const count = ref(0)
 const wbRef = ref()
@@ -21,7 +20,7 @@ const apps = [
   { id: 3, name: 'Calculator', icon: '🧮', action: () => alert('Calculator app clicked!') },
 ]
 
-function openApp(appName) {
+function openApp(appName: string) {
   if (appName === 'Browser') {
     wbRef.value.open()
   }

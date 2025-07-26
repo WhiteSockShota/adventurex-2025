@@ -2,6 +2,7 @@
 import Tip from '../Tip.ts';
 import { useAudioStore } from '@/stores/audioStore';
 import { useGameManager } from '@/stores/gameStore';
+import { initializeAudio } from '@/utils/audioEffect.ts';
 import { onMounted, ref } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
@@ -20,6 +21,7 @@ function handleStartClick() {
   audioStore.pause()
   if (username.value.length !== 0) {
     gameManager.setUsername(username.value)
+    initializeAudio()
     const nextUrl = encodeURIComponent('/text?text=2060.07.26&to=/twitter')
     router.push('/warning?next=' + nextUrl)
   }

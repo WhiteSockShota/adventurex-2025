@@ -1,7 +1,9 @@
 <template>
-  <div ref="terminalBody"
+  <div
+    ref="terminalBody"
     class="terminal-container bg-black/80 h-full w-full rounded-b-md p-4 text-sm font-mono text-green-400 overflow-y-auto"
-    @click="focusInput">
+    @click="focusInput"
+  >
     <!-- 命令历史记录 -->
     <div v-for="(line, index) in history" :key="index" class="mb-1">
       <div v-if="line.type === 'output'" v-html="line.text"></div>
@@ -14,9 +16,13 @@
     <!-- 当前输入行 -->
     <div class="flex items-center">
       <span class="mr-2">></span>
-      <input ref="inputRef" v-model="currentInput" type="text"
+      <input
+        ref="inputRef"
+        v-model="currentInput"
+        type="text"
         class="input-field flex-grow bg-transparent border-none text-green-400 outline-none p-0 m-0"
-        @keydown.enter.prevent="handleCommand" />
+        @keydown.enter.prevent="handleCommand"
+      />
       <!-- 这是一个伪光标，真正的输入发生在隐藏的input中 -->
       <!-- <span class="blinking-cursor w-2 h-4 bg-green-400"></span> -->
     </div>
@@ -24,6 +30,7 @@
 </template>
 
 <script setup>
+import { useAudioEffects } from '@/utils/audioEffect'
 import { ref, onMounted, nextTick } from 'vue'
 
 // --- 组件状态 (Refs) ---

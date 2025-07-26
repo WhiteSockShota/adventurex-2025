@@ -11,3 +11,4 @@
 /tauri-app/node_modules
 /tauri-app/src-tauri/target
 /tauri-app/yarn.lock
+.DS_Store

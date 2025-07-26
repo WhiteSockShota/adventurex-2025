@@ -19,6 +19,7 @@
     "iconoir": "^7.11.0",
     "pinia": "^3.0.3",
     "powerglitch": "^2.4.0",
+    "tone": "^15.1.22",
     "vue": "^3.5.17",
     "vue-powerglitch": "^1.1.0",
     "vue-router": "^4.5.1",

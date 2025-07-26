@@ -38,7 +38,7 @@
 import { useAudioEffects } from '@/utils/audioEffect'
 import { ref, onMounted, nextTick, type Ref } from 'vue'
 import { Terminal, type Command, Cd, Ls, Cat, Touch, Mkdir, Rm, Zero, Pwd } from '@/entity/terminal'
-import { DeepSeekAI } from '@/services/deepseekAI'
+import { DeepSeekAI, type StreamChunk } from '@/services/deepseekAI'
 
 // --- Component State ---
 const history: Ref<Record[]> = ref([])
@@ -136,49 +136,45 @@ const handleAIChat = async () => {
     prompt: 'Patient Zero > ',
   })
   currentInput.value = ''
+  await scrollToBottom()
 
-  // 显示AI正在输入的提示
-  isAITyping.value = true
+  // 为AI响应添加占位符
+  const responseIndex = history.value.length
   history.value.push({
     type: 'output',
-    text: 'Zero is typing...',
+    text: 'Zero: ',
   })
-  await scrollToBottom()
+  isAITyping.value = true
 
   try {
-    // 调用AI服务
-    console.log('Calling DeepSeek API...')
-    const response = await deepseekAI.sendMessage(userMessage)
-    console.log('API Response:', response)
+    let fullResponse = ''
+    for await (const chunk of deepseekAI.sendMessageStream(userMessage)) {
+      if (chunk.error) {
+        history.value[responseIndex].text =
+          `<span class="text-red-400">Zero: ${chunk.content}</span>`
+        break
+      }
 
-    // 移除"正在输入"提示
-    history.value.pop()
-    isAITyping.value = false
-
-    // 显示AI响应
-    if (response.error) {
-      console.error('API Error:', response.error)
-      history.value.push({
-        type: 'output',
-        text: `<span class="text-red-400">Zero: ${response.content}</span>`,
-      })
-    } else {
-      // 模拟打字效果
-      await typewriterEffect(`Zero: ${response.content}`)
+      if (!chunk.done) {
+        fullResponse += chunk.content
+        // 添加闪烁光标效果
+        history.value[responseIndex].text =
+          `Zero: ${fullResponse}<span class="blinking-cursor">▋</span>`
+        await scrollToBottom()
+      } else {
+        // 流结束后移除光标
+        history.value[responseIndex].text = `Zero: ${fullResponse}`
+        break
+      }
     }
   } catch (error) {
-    console.error('Unexpected error:', error)
-    // 移除"正在输入"提示
-    history.value.pop()
+    console.error('Failed to process AI stream:', error)
+    history.value[responseIndex].text =
+      '<span class="text-red-400">Zero: 抱歉，我遇到了一些技术问题... 😵</span>'
+  } finally {
     isAITyping.value = false
-
-    history.value.push({
-      type: 'output',
-      text: '<span class="text-red-400">Zero: 抱歉，我遇到了一些技术问题... 😵</span>',
-    })
+    await scrollToBottom()
   }
-
-  await scrollToBottom()
 }
 
 const typewriterEffect = async (text: string) => {
@@ -309,5 +305,15 @@ onMounted(() => {
   overflow: hidden;
   white-space: nowrap;
   animation: typing 0.5s steps(40, end);
+}
+
+/* Blinking cursor for streaming response */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+.blinking-cursor {
+  animation: blink 1s step-end infinite;
 }
 </style>

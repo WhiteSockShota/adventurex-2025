@@ -38,6 +38,6 @@ export const intro: Dialog[] = [
   }),
   createDialog({
     text: '不要走！'.repeat(100),
-    nextPage: '/empty?to=/',
+    nextPage: '/empty?to=/dialog?id=3',
   }),
 ]

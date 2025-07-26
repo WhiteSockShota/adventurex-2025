@@ -8,6 +8,7 @@ import TextPlugin from 'gsap/TextPlugin';
 import { sleep } from '@/utils/async';
 import { parseSRT } from '@/entity/audio/subtitle';
 import mad from '@/entity/audio/subtitles/mad.srt?raw'
+import whatever from '@/entity/audio/subtitles/whatever.srt?raw'
 import { PowerGlitch } from 'powerglitch';
 
 const gameManager = useGameManager()
@@ -118,6 +119,9 @@ function execEmit(emit: string) {
                     "maxHeight": 0.01
                 }
             })
+            break
+        case 'play-whatever':
+            gameManager.playSubtitle(parseSRT(whatever))
             break
     }
 }

@@ -1,5 +1,6 @@
 import type { Line, Subtitle } from '@/entity/audio/subtitle'
 import type { Dialog } from '@/entity/Dialog'
+import { help } from '@/entity/dialogs/help'
 import { intro } from '@/entity/dialogs/intro'
 import { thankYou } from '@/entity/dialogs/thankyou'
 import { sleep } from '@/utils/async'
@@ -10,6 +11,7 @@ export const useGameManager = defineStore('gameManager', () => {
   const dialogs = new Map([
     [1, thankYou],
     [2, intro],
+    [3, help],
   ])
 
   var currentSubtitle: Subtitle | undefined = undefined

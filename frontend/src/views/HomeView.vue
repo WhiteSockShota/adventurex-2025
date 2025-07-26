@@ -27,7 +27,7 @@ function handleStartClick() {
 <!-- src/components/StartScreen.vue -->
 <template>
   <div class="w-full h-screen bg-black text-white flex flex-col items-center justify-center relative overflow-hidden"
-    @click="audioStore.play('/audio/2060Blues.mp3')">
+    @click="audioStore.play('/audio/2060Blus.mp3')">
     <!-- 背景特效 -->
     <div class="absolute inset-0 animate-pulse opacity-10 bg-gradient-to-br from-red-500 via-black to-blue-500"></div>
 

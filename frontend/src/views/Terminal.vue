@@ -1,9 +1,7 @@
 <template>
-  <div
-    ref="terminalBody"
+  <div ref="terminalBody"
     class="terminal-container bg-black/80 h-full w-full rounded-b-md p-4 text-sm font-mono text-green-400 overflow-y-auto"
-    @click="focusInput"
-  >
+    @click="focusInput">
     <!-- 命令历史记录 -->
     <div v-for="(line, index) in history" :key="index" class="mb-1">
       <div v-if="line.type === 'output'" v-html="line.text"></div>
@@ -16,13 +14,9 @@
     <!-- 当前输入行 -->
     <div class="flex items-center">
       <span class="mr-2">></span>
-      <input
-        ref="inputRef"
-        v-model="currentInput"
-        type="text"
+      <input ref="inputRef" v-model="currentInput" type="text"
         class="input-field flex-grow bg-transparent border-none text-green-400 outline-none p-0 m-0"
-        @keydown.enter.prevent="handleCommand"
-      />
+        @keydown.enter.prevent="handleCommand" />
       <!-- 这是一个伪光标，真正的输入发生在隐藏的input中 -->
       <!-- <span class="blinking-cursor w-2 h-4 bg-green-400"></span> -->
     </div>
@@ -132,21 +126,28 @@ onMounted(() => {
 <style scoped>
 /* 使光标保持在输入框中闪烁 */
 .input-field:focus {
-  caret-color: #4ade80; /* Tailwind green-400 */
+  caret-color: #4ade80;
+  /* Tailwind green-400 */
 }
 
 /* 自定义滚动条样式，使其更具科技感 */
 .terminal-container::-webkit-scrollbar {
   width: 8px;
 }
+
 .terminal-container::-webkit-scrollbar-track {
-  background: #1f2937; /* gray-800 */
+  background: #1f2937;
+  /* gray-800 */
 }
+
 .terminal-container::-webkit-scrollbar-thumb {
-  background: #4b5563; /* gray-600 */
+  background: #4b5563;
+  /* gray-600 */
   border-radius: 4px;
 }
+
 .terminal-container::-webkit-scrollbar-thumb:hover {
-  background: #6b7280; /* gray-500 */
+  background: #6b7280;
+  /* gray-500 */
 }
 </style>

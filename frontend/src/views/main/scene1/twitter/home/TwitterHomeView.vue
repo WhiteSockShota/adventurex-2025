@@ -81,8 +81,8 @@ async function appendMockData() {
         for (let i = 0; i < 10; i++) {
             mockData.value.push(glitchPost)
         }
-        gameManager.playSubtitle(parseSRT(introDisqualify))
     }
+    if (mockCount.value == 3) gameManager.playSubtitle(parseSRT(introDisqualify))
     if (mockCount.value > 3) {
         gsap.to('#container', {
             display: 'none',
@@ -91,7 +91,7 @@ async function appendMockData() {
         document.body.style.backgroundColor = 'white'
         router.push('/empty?to=' + encodeURI('/dialog?id=1'))
     }
-    mockData.value = mockData.value.concat(mocks)
+    mockData.value = mockData.value.concat(posts)
 }
 </script>
 

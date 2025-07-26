@@ -38,7 +38,7 @@ function handleStartClick() {
     <p class="mt-4 text-lg z-10 text-gray-300">2060 年 7 月 27 日</p>
 
     <input v-model="username"
-      class="z-10 border-none bg-transparent border-b-solid text-white font-[MiSans] text-1rem text-center"></input>
+      class="outline-none border-none z-10 border-none bg-transparent border-b-solid text-white font-[MiSans] text-1rem text-center"></input>
 
     <p class="text-1.2rem z-2">⬆️为你的角色起个名字⬆️</p>
 

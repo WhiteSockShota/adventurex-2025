@@ -8,6 +8,8 @@ import TwitterView from '@/views/main/scene1/twitter/TwitterView.vue'
 import TwitterHomeView from '@/views/main/scene1/twitter/home/TwitterHomeView.vue'
 import TwitterMessagesView from '@/views/main/scene1/twitter/messages/TwitterMessagesView.vue'
 import DialogView from '@/views/main/DialogView.vue'
+import Zhihu from '@/views/Zhihu.vue'
+import Desktop from '@/views/Desktop.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

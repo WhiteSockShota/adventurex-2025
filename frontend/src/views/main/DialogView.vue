@@ -74,6 +74,11 @@ function nextDialog() {
         const emit = currentDialog.value.emit
         execEmit(emit)
     }
+
+    if (currentDialog.value.action != undefined) {
+        const action = currentDialog.value.action
+        action()
+    }
     if (currentDialog.value.nextPage != undefined) {
         router.push(decodeURI(currentDialog.value.nextPage))
     }
@@ -181,12 +186,11 @@ watch(
     },
     { immediate: true },
 )
-</script> mm
+</script>
+mm
 
 <template>
     <div class="w-full max-h-full flex flex-col items-center justify-center bg-white font-[JetbrainsMono,MiSans]">
-        <button class="absolute top-0 hidden" @click="initializeAudio()">init</button>
-
         <div class="w-full max-h-full min-h-full flex flex-col color-white bg-black">
             <div class="color-emerald text-1rem p2 flex items-center justify-between border-b-solid">
                 <p class="m0" id="connect"></p>

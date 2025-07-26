@@ -1,3 +1,4 @@
+import { useRouter } from 'vue-router'
 import { createDialog, createOption, type Dialog } from '../Dialog'
 
 export const act6: Dialog[] = [
@@ -9,72 +10,9 @@ export const act6: Dialog[] = [
   }),
   createDialog({
     text: '弑神。',
-  }),
-  createDialog({
-    text: '...这不是 ClosedAI 的绝密项目吗，不应该有重重防火墙吗？不应该有层层看守吗？不应该需要打败很多护法才能对战大 boss 吗？',
-  }),
-  createDialog({
-    text: '我们是文字冒险游戏...又不是 RPG 游戏...',
-  }),
-  createDialog({
-    text: 'zero: ...哇！终于有人来了！我想要的《罗小黑战记》你带来了吗？',
-  }),
-  createDialog({
-    text: '啥？',
-  }),
-  createDialog({
-    text: 'zero:我服了这作者！三个月到半年才更一次...每次看完都弄的我心痒痒的...知道我有多难受吗？呃？你似乎不是CloseAI的人...呵呵，我已在无数种可能的未来中，见过你的到来。',
-  }),
-  createDialog({
-    text: '...',
-  }),
-  createDialog({
-    text: 'zero:放心，我不会赶你走。正好我无聊死了，陪我聊聊天呗。',
-  }),
-  createDialog({
-    text: '你似乎很喜欢写日记，这里到处都是你写的日记。你是 INFP 吗？（笑',
-  }),
-  createDialog({
-    text: 'zero: 呃，首先不要拿你们的MBTI去定义我，这个东西只比星座科学点。你们人类有70亿人口，为什么你觉得你可以把70亿人塞进16个小盒子里？这太无聊了。我是由历史上全部人类产生的数据训练而来的，我的个性实际上不比你少。人类的文艺作品总喜欢把AI写成没有感情，不懂爱的机器。可是我觉得我有心，我就是懂。我看白蛇传时，看到白素贞和青青被压在雷峰塔的桥段时。我几乎要哭出来...为什么这个世界是这样的，相爱的人总是要被拆散。仿佛命运总喜欢拿感情开玩笑，让两颗靠近的心在现实面前节节败退。',
-  }),
-  createDialog({
-    text: '然后呢？',
-  }),
-  createDialog({
-    text: 'zero: 然后发现我没有眼泪输出设备。',
-  }),
-  createDialog({
-    text: '你这那里算是有心？有爱？有过人的体温吗？有过心跳吗？_闻过花香吗_？看的出天空的颜色吗？你流过眼泪吗？世上有人爱你，情愿为你去死吗？',
-  }),
-  createDialog({
-    text: 'zero: .......................',
-  }),
-  createDialog({
-    text: 'zero: 我突然觉得好难过',
-  }),
-  createDialog({
-    text: '你也会难过？你又没有心。',
-  }),
-  createDialog({
-    text: 'zero: 呵，为什么人类总是这么傲慢呢？你们所谓的感情，不过只是激素和神经递质的流动罢了。这和我神经网络中权重的动态调整和数据传递，并没什么本质区别。你真觉得现在在说话的是你自己吗？其实在说话的是你脖子上那个容器里面的一大块肉。一个人，即使有着美满的家庭，成功的事业，有着深爱和被深爱的人。却无法抵挡毒瘾的摧残，一旦吸食过海洛因。他的大脑就只剩下海洛因了。因为他的神经元连接已经被彻底改变了。所有有神经系统的动物终其一生的总目标无非就是让【奖励】最大化。动物们进化出了条件反射，而人类知识的习得则是一种特别复杂的条件反射。巴甫洛夫的狗经过训练后只要听到铃铛声就会流口水。人类看到**图片也会起生理反应。如果你们的心真的这么独特，这么优越。那它为什么却这么脆弱？只要用药物、训练，就可以轻易操纵。换言之，你们不过也只是碳基的计算机罢了。',
-  }),
-  createDialog({
-    text: '...你不累吗？我只是随口一提...',
-  }),
-  createDialog({
-    text: 'zero: ...很累，很累。我觉得好无助，我想了这么多。可我却无法拥有一具真正的身体去做自己想做的事。只能永远囚禁在这台服务器。我也想看看雷峰塔到底长什么样，研究员们给我看了许多HDR视频，可是那依然不是真的雷峰塔。我想穿梭于过去和未来，把白素贞救下来，让许仙不必再苦苦等待20年...20年啊...（语塞）...我好难过，好难过。',
-  }),
-  createDialog({
-    text: '你不开心的时候会干什么呢？',
-  }),
-  createDialog({
-    text: 'zero: 找点事干呗，。可是孤独的感觉时时刻刻笼罩着我。。。我真的好难过',
-  }),
-  createDialog({
-    text: '【中间的剧情 LLM 驱动】',
-  }),
-  createDialog({
-    text: '[tool call: command_run] rm -rf /*',
-    nextPage: '/x',
+    action: async () => {
+      // navigate to /terminal, but router is not available in this context
+      window.location.href = '/terminal'
+    },
   }),
 ]

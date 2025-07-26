@@ -1,5 +1,4 @@
-import { useModalStore } from '@/stores/modalStore'
-import { defineAsyncComponent } from 'vue'
+import { useRouter } from 'vue-router'
 import { createDialog, createOption, type Dialog } from '../Dialog'
 
 export const act3: Dialog[] = [
@@ -21,11 +20,10 @@ export const act3: Dialog[] = [
     text: '粤语？数据库记录，这门语言在‘第三次世界大战’后就已失传。你是……一个活着的‘源文件’。',
   }),
   createDialog({
-    text: '【Open browser: block://wikipedia/Post-Human_Governance_Age】',
+    text: '',
     action: async () => {
-      const modal = useModalStore()
-      const Wikipedia = defineAsyncComponent(() => import('@/views/Wikipedia.vue'))
-      modal.show(Wikipedia)
+      const router = useRouter()
+      router.push('/wikipedia')
     },
     nextPage: '/dialog?id=5',
   }),

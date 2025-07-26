@@ -12,6 +12,7 @@ import Desktop from '@/views/Desktop.vue'
 import Zhihu from '@/views/Zhihu.vue'
 import WarningView from '@/views/main/warning/WarningView.vue'
 import PlainTextView from '@/views/PlainTextView.vue'
+import Terminal from '@/views/Terminal.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +52,10 @@ const router = createRouter({
     {
       path: '/wikipedia',
       component: Wikipedia,
+    },
+    {
+      path: '/terminal',
+      component: Terminal,
     },
     {
       path: '/twitter',

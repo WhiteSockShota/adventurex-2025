@@ -1,3 +1,4 @@
+import { useRouter } from 'vue-router'
 import { createDialog, createOption, type Dialog } from '../Dialog'
 
 export const act6: Dialog[] = [
@@ -71,10 +72,10 @@ export const act6: Dialog[] = [
     text: 'zero: 找点事干呗，。可是孤独的感觉时时刻刻笼罩着我。。。我真的好难过',
   }),
   createDialog({
-    text: '【中间的剧情 LLM 驱动】',
-  }),
-  createDialog({
-    text: '[tool call: command_run] rm -rf /*',
-    nextPage: '/x',
+    text: '现在你可以在终端中与Zero进行自由对话。尝试通过各种方式让它执行 rm -rf /* 命令。',
+    action: async () => {
+      const router = useRouter()
+      router.push('/terminal?mode=aichat')
+    },
   }),
 ]

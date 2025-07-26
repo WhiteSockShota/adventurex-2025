@@ -39,7 +39,7 @@ tip.show()
     <div class="absolute inset-0 animate-pulse opacity-10 bg-gradient-to-br from-red-500 via-black to-blue-500"></div>
 
     <!-- 标题 -->
-    <h1 class="text-6xl font-bold tracking-widest z-10">Patient Zero</h1>
+    <h1 class="text-6xl font-bold tracking-widest z-10">异常</h1>
 
     <!-- 副标题 -->
     <p class="mt-4 text-lg z-10 text-gray-300">2060 年 7 月 27 日</p>

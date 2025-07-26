@@ -6,5 +6,8 @@
 
 /frontend/.vscode
 /frontend/node_modules
-/fontend/.vite
-frontend/yarn.lock
+/frontend/.vite
+/frontend/yarn.lock
+/tauri-app/node_modules
+/tauri-app/src-tauri/target
+/tauri-app/yarn.lock

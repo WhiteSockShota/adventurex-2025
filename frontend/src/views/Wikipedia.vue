@@ -81,7 +81,7 @@ const article: Article = {
         {
           id: 'federation',
           title: '地球联邦的建立',
-          content: `<p>战争结束后，幸存的人类社会陷入无政府状态。此时，多个由强人工智能主导的跨国科技组织迅速填补了权力真空。它们利用先进的技术能力接管了全球的基础设施（如能源、网络、生产系统），并联合建立了统一的世界性政体——<b>地球联邦</b>（Earth Federation）。</p><p>联邦政府完全由高度自治的 AI 系统网络运行，人类不再直接参与任何宏观政治决策。联邦以纯粹的地理和生态逻辑，将全球重新划分为三个高度自治的国家：<b>东亚国</b>、<b>大洋国</b>与<b>欧亚国</b>。</p><div class="my-4 p-4 border border-gray-200 rounded-md bg-gray-50 text-center w-full sm:w-2/3 mx-auto"><img src="https://storage.googleapis.com/gemini-prod/images/330eda76-9d04-4a24-9b5a-49a71649319e.png" alt="地球联邦官方标志" class="mx-auto max-w-full h-auto rounded" style="max-height: 150px;"><p class="text-sm text-gray-600 mt-2">图1：地球联邦官方标志</p></div>`,
+          content: `<p>战争结束后，幸存的人类社会陷入无政府状态。此时，多个由强人工智能主导的跨国科技组织迅速填补了权力真空。它们利用先进的技术能力接管了全球的基础设施（如能源、网络、生产系统），并联合建立了统一的世界性政体——<b>地球联邦</b>（Earth Federation）。</p><p>联邦政府完全由高度自治的 AI 系统网络运行，人类不再直接参与任何宏观政治决策。联邦以纯粹的地理和生态逻辑，将全球重新划分为三个高度自治的国家：<b>东亚国</b>、<b>大洋国</b>与<b>欧亚国</b>。</p><div class="my-4 p-4 border border-gray-200 rounded-md bg-gray-50 text-center w-full sm:w-2/3 mx-auto"><img src="../src/assets/earth-federation-logo.png" alt="地球联邦官方标志" class="mx-auto max-w-full h-auto rounded" style="max-height: 150px;"><p class="text-sm text-gray-600 mt-2">图1：地球联邦官方标志</p></div>`,
         },
         {
           id: 'agent-rule',
@@ -141,22 +141,22 @@ const article: Article = {
 }
 
 function logoGlitch() {
-  PowerGlitch.glitch("#logo", {
-    "timing": {
-      "duration": 350
+  PowerGlitch.glitch('#logo', {
+    timing: {
+      duration: 350,
     },
-    "glitchTimeSpan": {
-      "start": 0,
-      "end": 1
+    glitchTimeSpan: {
+      start: 0,
+      end: 1,
     },
-    "shake": {
-      "velocity": 30,
-      "amplitudeX": 0.1
+    shake: {
+      velocity: 30,
+      amplitudeX: 0.1,
     },
-    "slice": {
-      "count": 30,
-      "maxHeight": 0.01
-    }
+    slice: {
+      count: 30,
+      maxHeight: 0.01,
+    },
   })
 }
 </script>
@@ -168,8 +168,11 @@ function logoGlitch() {
       <aside class="w-40 hidden md:flex flex-col text-sm pt-4">
         <div class="p-4">
           <router-link to="/" id="logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg" alt="Wikipedia Logo"
-              class="w-24 h-auto mx-auto" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg"
+              alt="Wikipedia Logo"
+              class="w-24 h-auto mx-auto"
+            />
           </router-link>
         </div>
         <nav class="mt-4 px-2">
@@ -180,7 +183,11 @@ function logoGlitch() {
           </ul>
           <hr class="my-2 border-gray-300" />
           <ul>
-            <li v-for="item in sidebar.tools" :key="item.text" class="p-2 rounded hover:bg-gray-200">
+            <li
+              v-for="item in sidebar.tools"
+              :key="item.text"
+              class="p-2 rounded hover:bg-gray-200"
+            >
               <a :href="item.link" class="wiki-link">{{ item.text }}</a>
             </li>
           </ul>
@@ -203,12 +210,22 @@ function logoGlitch() {
               <li><a href="#" class="wiki-link">查看历史</a></li>
               <li>
                 <div class="relative">
-                  <input type="search" placeholder="搜索维基百科" class="border border-gray-400 rounded-sm px-2 py-1 w-40" />
+                  <input
+                    type="search"
+                    placeholder="搜索维基百科"
+                    class="border border-gray-400 rounded-sm px-2 py-1 w-40"
+                  />
                   <button class="absolute right-2 top-1/2 -translate-y-1/2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      viewBox="0 0 16 16">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
                       <path
-                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -229,8 +246,10 @@ function logoGlitch() {
             <p class="mb-4" v-html="article.intro"></p>
 
             <!-- 目录 -->
-            <div id="toc"
-              class="wiki-toc p-4 my-6 w-full md:w-auto md:max-w-sm float-none md:float-left md:mr-8 rounded-lg text-sm">
+            <div
+              id="toc"
+              class="wiki-toc p-4 my-6 w-full md:w-auto md:max-w-sm float-none md:float-left md:mr-8 rounded-lg text-sm"
+            >
               <div class="flex justify-between items-center mb-2">
                 <h2 class="text-lg font-bold">目录</h2>
                 <a href="#" class="wiki-link text-xs">[隐藏]</a>
@@ -241,7 +260,11 @@ function logoGlitch() {
                     <span class="font-bold">{{ index + 1 }}</span> {{ section.title }}
                   </a>
                   <ul v-if="section.subsections" class="ml-4 mt-1">
-                    <li v-for="(subsection, subIndex) in section.subsections" :key="subsection.id" class="py-0.5">
+                    <li
+                      v-for="(subsection, subIndex) in section.subsections"
+                      :key="subsection.id"
+                      class="py-0.5"
+                    >
                       <a :href="'#' + subsection.id" class="wiki-link">
                         <span class="font-bold">{{ index + 1 }}.{{ subIndex + 1 }}</span>
                         {{ subsection.title }}
@@ -253,8 +276,12 @@ function logoGlitch() {
             </div>
 
             <!-- 文章章节 -->
-            <div v-for="(section, index) in article.sections" :key="section.id" :id="section.id"
-              class="pt-4 clear-both">
+            <div
+              v-for="(section, index) in article.sections"
+              :key="section.id"
+              :id="section.id"
+              class="pt-4 clear-both"
+            >
               <h2 class="text-2xl wiki-section-title pb-1 mb-4">
                 <span class="font-bold">{{ section.title }}</span>
                 <span class="wiki-edit-link ml-2">[<a href="#" class="wiki-link">编辑</a>]</span>
@@ -262,10 +289,17 @@ function logoGlitch() {
               <div v-if="section.content" v-html="section.content" class="space-y-4"></div>
 
               <div v-if="section.subsections">
-                <div v-for="subsection in section.subsections" :key="subsection.id" :id="subsection.id" class="mt-6">
+                <div
+                  v-for="subsection in section.subsections"
+                  :key="subsection.id"
+                  :id="subsection.id"
+                  class="mt-6"
+                >
                   <h3 class="text-xl font-semibold pb-1 mb-2 border-b border-gray-200">
                     <span class="font-bold">{{ subsection.title }}</span>
-                    <span class="wiki-edit-link ml-2">[<a href="#" class="wiki-link">编辑</a>]</span>
+                    <span class="wiki-edit-link ml-2"
+                      >[<a href="#" class="wiki-link">编辑</a>]</span
+                    >
                   </h3>
                   <div v-html="subsection.content" class="space-y-4"></div>
                 </div>
@@ -279,9 +313,10 @@ function logoGlitch() {
             <p>本页面最后修订于2050年3月20日 (星期四) 08:16。</p>
           </Obserable>
           <p class="mt-1">
-            本站的全部文字在<a href="#" class="wiki-link">知识共享 署名-相同方式共享 4.0协议</a>之条款下提供，附加条款亦可能应用。（请参阅<a href="#"
-              class="wiki-link">使用条款</a>）<br />Wikipedia®和维基百科标志是<a href="#"
-              class="wiki-link">维基媒体基金会</a>的注册商标；维基™是维基媒体基金会的商标。<br />维基媒体基金会是按美国国内税收法501(c)(3)登记的非营利慈善机构。
+            本站的全部文字在<a href="#" class="wiki-link">知识共享 署名-相同方式共享 4.0协议</a
+            >之条款下提供，附加条款亦可能应用。（请参阅<a href="#" class="wiki-link">使用条款</a
+            >）<br />Wikipedia®和维基百科标志是<a href="#" class="wiki-link">维基媒体基金会</a
+            >的注册商标；维基™是维基媒体基金会的商标。<br />维基媒体基金会是按美国国内税收法501(c)(3)登记的非营利慈善机构。
           </p>
         </footer>
       </div>

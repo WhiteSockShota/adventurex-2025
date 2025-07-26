@@ -50,7 +50,8 @@ tip.show()
     <!-- 开始按钮 -->
     <div
       class="mt-12 px-8 py-3 text-xl font-semibold bg-white text-black rounded hover:bg-gray-200 transition z-10 decoration-none"
-      to="/twitter" @click="handleStartClick">
+      to="/twitter" @click="handleStartClick" v-show="username != ''">
+
       ▶ 开始游戏
     </div>
 

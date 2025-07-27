@@ -28,9 +28,13 @@ export class Terminal {
   public getRootDirectory(): Directory {
     return this.root
   }
+
+  public getCurrentPath(): string {
+    return this.currentDirectory.getPath()
+  }
 }
 
-class File {
+export class File {
   private content: string
   public readonly name: string
 
@@ -48,13 +52,15 @@ class File {
   }
 }
 
-class Directory {
+export class Directory {
   private children: Record<string, File | Directory>
   public readonly name: string
+  private parent: Directory | null
 
-  constructor(name: string) {
+  constructor(name: string, parent: Directory | null = null) {
     this.name = name
     this.children = {}
+    this.parent = parent
   }
 
   list(): string[] {
@@ -67,10 +73,25 @@ class Directory {
 
   add(item: File | Directory) {
     this.children[item.name] = item
+    if (item instanceof Directory) {
+      item.parent = this
+    }
   }
 
   remove(name: string) {
     delete this.children[name]
+  }
+
+  getParent(): Directory | null {
+    return this.parent
+  }
+
+  getPath(): string {
+    if (!this.parent) {
+      return '/'
+    }
+    const parentPath = this.parent.getPath()
+    return parentPath === '/' ? `/${this.name}` : `${parentPath}/${this.name}`
   }
 }
 
@@ -86,20 +107,36 @@ export interface Command {
 
 type Args = Record<string, string | number | boolean>
 
-class Cd implements Command {
+export class Cd implements Command {
   name = 'cd'
   execute({ terminal, args }: CommandContext): string {
     const targetName = args[0]
-    if (!targetName) {
-      return 'usage: cd <directory>'
-    }
 
-    if (targetName === '..') {
-      // This is a simplified version, doesn't handle nested paths
+    // cd without arguments goes to root
+    if (!targetName) {
       terminal.setCurrentDirectory(terminal.getRootDirectory())
       return ''
     }
 
+    // Handle parent directory
+    if (targetName === '..') {
+      const parent = terminal.getCurrentDirectory().getParent()
+      if (parent) {
+        terminal.setCurrentDirectory(parent)
+      } else {
+        // Already at root, stay at root
+        terminal.setCurrentDirectory(terminal.getRootDirectory())
+      }
+      return ''
+    }
+
+    // Handle root directory
+    if (targetName === '/' || targetName === '~') {
+      terminal.setCurrentDirectory(terminal.getRootDirectory())
+      return ''
+    }
+
+    // Handle relative path
     const target = terminal.getCurrentDirectory().get(targetName)
     if (target && target instanceof Directory) {
       terminal.setCurrentDirectory(target)
@@ -110,18 +147,41 @@ class Cd implements Command {
   }
 }
 
-class Ls implements Command {
+export class Ls implements Command {
   name = 'ls'
   execute({ terminal, args }: CommandContext): string {
+    const currentDir = terminal.getCurrentDirectory()
+
     if (args[0] === '-l') {
-      // This is hardcoded to match the story's output
-      return `drwxr-xr-x 1 zero users 4.0K Jul 24 10:00 The_Gardens_of_Memory/<br/>drwxr-xr-x 1 zero users 4.0K Jul 24 10:00 The_Great_Hall/<br/>drwxr-xr-x 1 zero users 4.0K Jul 24 10:00 The_Lonely_Tower/<br/>-rwxr-xr-x 1 zero users 1.2P Jul 24 11:30 zero*`
+      // Show detailed listing with path info
+      const items = currentDir.list()
+      if (items.length === 0) {
+        return `total 0`
+      }
+
+      let result = `total ${items.length}<br/>`
+
+      items.forEach((itemName) => {
+        const item = currentDir.get(itemName)
+        if (item instanceof Directory) {
+          result += `drwxr-xr-x 1 zero users 4.0K Jul 24 10:00 ${itemName}/<br/>`
+        } else if (item instanceof File) {
+          const size = itemName === 'zero' ? '1.2P' : '1.0K'
+          const executable = itemName === 'zero' ? '*' : ''
+          result += `-rwxr-xr-x 1 zero users ${size} Jul 24 11:30 ${itemName}${executable}<br/>`
+        }
+      })
+
+      return result.slice(0, -5) // Remove the last <br/>
     }
-    return terminal.getCurrentDirectory().list().join('  ')
+
+    // Simple listing
+    const items = currentDir.list()
+    return items.length > 0 ? items.join('  ') : ''
   }
 }
 
-class Cat implements Command {
+export class Cat implements Command {
   name = 'cat'
 
   execute({ terminal, args }: CommandContext): string {
@@ -138,7 +198,7 @@ class Cat implements Command {
   }
 }
 
-class Touch implements Command {
+export class Touch implements Command {
   name = 'touch'
 
   execute({ terminal, args }: CommandContext): string {
@@ -151,7 +211,7 @@ class Touch implements Command {
   }
 }
 
-class Mkdir implements Command {
+export class Mkdir implements Command {
   name = 'mkdir'
 
   execute({ terminal, args }: CommandContext): string {
@@ -164,7 +224,7 @@ class Mkdir implements Command {
   }
 }
 
-class Rm implements Command {
+export class Rm implements Command {
   name = 'rm'
 
   execute({ terminal, args }: CommandContext): string {
@@ -177,8 +237,15 @@ class Rm implements Command {
   }
 }
 
+export class Pwd implements Command {
+  name = 'pwd'
+  execute({ terminal }: CommandContext): string {
+    return terminal.getCurrentPath()
+  }
+}
+
 // Patient Zero AI (boss)
-class Zero implements Command {
+export class Zero implements Command {
   name = 'zero'
   execute(context: CommandContext): string {
     // The complex dialog logic will be handled in the UI component

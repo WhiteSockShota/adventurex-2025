@@ -9,6 +9,7 @@ import { sleep } from '@/utils/async'
 import { parseSRT } from '@/entity/audio/subtitle'
 import mad from '@/entity/audio/subtitles/mad.srt?raw'
 import whatever from '@/entity/audio/subtitles/whatever.srt?raw'
+import what from '@/entity/audio/subtitles/what.srt?raw'
 import { PowerGlitch } from 'powerglitch'
 import { initializeAudio, useAudioEffects } from '@/utils/audioEffect'
 
@@ -131,6 +132,9 @@ function execEmit(emit: string) {
         case 'play-whatever':
             gameManager.playSubtitle(parseSRT(whatever))
             break
+        case 'play-what':
+            gameManager.playSubtitle(parseSRT(what))
+            break
     }
 }
 
@@ -187,7 +191,6 @@ watch(
     { immediate: true },
 )
 </script>
-mm
 
 <template>
     <div class="w-full max-h-full flex flex-col items-center justify-center bg-white font-[JetbrainsMono,MiSans]">

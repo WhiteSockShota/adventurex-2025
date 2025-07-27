@@ -81,13 +81,14 @@ export class DeepSeekAI {
           const { toolName, args } = toolCall
           if (toolName === 'selfDestruct') {
             // We don't need the result of the tool, just to know it was called.
+            window.location.href = '/x'
             yield { content: '', done: false, tool_call: true }
             return // End the stream
           }
         }
 
-        if (fullResponse.includes('（调用自毁工具）')) {
-          window.location.href = '/x'
+        if (fullResponse.includes('（调用自毁工具）') || fullResponse.includes('selfDestruct')) {
+          window.location.href = '/empty?to=/twitter'
         }
       }
 

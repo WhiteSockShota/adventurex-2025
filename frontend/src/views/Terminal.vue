@@ -1,33 +1,26 @@
 <template>
-  <div
-    ref="terminalBody"
+  <div ref="terminalBody"
     class="terminal-container bg-black/80 h-full w-full rounded-b-md p-4 text-sm font-mono text-green-400 overflow-y-auto"
-    @click="focusInput"
-  >
+    @click="focusInput">
     <!-- 命令历史记录 -->
     <div v-for="(line, index) in history" :key="index" class="mb-1">
       <div v-if="line.type === 'output'" v-html="line.text"></div>
       <div v-else class="flex items-start">
         <span class="mr-2 whitespace-nowrap">{{
           line.prompt || 'root@4bt8rei9gvn4-zero.closedai.com $ '
-        }}</span>
+          }}</span>
         <span>{{ line.text }}</span>
       </div>
     </div>
 
     <!-- 当前输入行 -->
-    <div class="flex items-start">
+    <div class="flex items-center font-[JetbrainsMono]">
       <span class="mr-2 whitespace-nowrap">{{
         chatWithAI ? 'Patient Zero > ' : getCurrentPrompt()
-      }}</span>
-      <input
-        ref="inputRef"
-        v-model="currentInput"
-        type="text"
-        class="input-field flex-grow bg-transparent border-none text-green-400 outline-none p-0 m-0"
-        @keydown.enter.prevent="handleInput"
-        :placeholder="chatWithAI ? '和Patient Zero聊天...' : ''"
-      />
+        }}</span>
+      <input ref="inputRef" v-model="currentInput" type="text"
+        class="input-field flex-grow bg-transparent border-none text-green-400 outline-none p-0 m-0 font-[JetbrainsMono]"
+        @keydown.enter.prevent="handleInput" :placeholder="chatWithAI ? '和Patient Zero聊天...' : ''" />
       <!-- 这是一个伪光标，真正的输入发生在隐藏的input中 -->
       <!-- <span class="blinking-cursor w-2 h-4 bg-green-400"></span> -->
     </div>
@@ -310,6 +303,7 @@ onMounted(() => {
   from {
     width: 0;
   }
+
   to {
     width: 100%;
   }
@@ -327,6 +321,7 @@ onMounted(() => {
     opacity: 0;
   }
 }
+
 .blinking-cursor {
   animation: blink 1s step-end infinite;
 }

@@ -4,12 +4,16 @@ import { createDialog, createOption, type Dialog } from '../Dialog'
 
 export const act5: Dialog[] = [
   createDialog({
-    text: '【Open browser: https://www.zhihu.com/article/2025-07-24】',
+    text: '[Open browser: https://www.zhihu.com/article/2025-07-24]',
     action: async () => {
       const modal = useModalStore()
       const Zhihu = defineAsyncComponent(() => import('@/views/Zhihu.vue'))
       modal.show(Zhihu)
     },
+    emit: 'play-what',
+  }),
+  createDialog({
+    text: '.......',
   }),
   createDialog({
     text: '不。',

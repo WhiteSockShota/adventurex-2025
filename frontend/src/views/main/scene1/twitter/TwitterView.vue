@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
 import { Home, Mail } from '@iconoir/vue'
 import FakeNavButton from './home/components/FakeNavButton.vue'
 import { onMounted } from 'vue';
 import { useAudioStore } from '@/stores/audioStore';
+
+const route = useRoute()
 
 const audioStore = useAudioStore()
 
@@ -25,13 +28,13 @@ onMounted(() => {
                 </svg>
 
                 <div class="mt-5vh">
-                    <RouterLink to="/twitter" style="all: unset">
+                    <RouterLink :to="route.path.startsWith('/x') ? '/x' : '/twitter'" style="all: unset">
                         <FakeNavButton name="主页">
                             <Home />
                         </FakeNavButton>
                     </RouterLink>
 
-                    <RouterLink to="/twitter/messages" class="inline-block" style="all: unset">
+                    <RouterLink :to="route.path.startsWith('/x') ? '/x/messages' : '/twitter/messages'" class="inline-block" style="all: unset">
                         <FakeNavButton name="消息">
                             <Mail />
                         </FakeNavButton>

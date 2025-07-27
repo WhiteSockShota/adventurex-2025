@@ -70,39 +70,39 @@ onMounted(() => {
 })
 
 function nextDialog() {
-    console.log(currentDialog.value)
-    if (currentDialog.value.emit != undefined) {
-        const emit = currentDialog.value.emit
-        execEmit(emit)
+  console.log(currentDialog.value)
+  if (currentDialog.value.emit != undefined) {
+    const emit = currentDialog.value.emit
+    execEmit(emit)
+  }
+  if (currentDialog.value.action != undefined) {
+    const action = currentDialog.value.action
+    action()
+  }
+  if (currentDialog.value.nextPage != undefined) {
+    router.push(decodeURI(currentDialog.value.nextPage))
+    return
+  }
+  if (currentDialog.value.options.length != 0) {
+    const options = currentDialog.value.options
+    console.log('OPTIONS!', options)
+    if (options.map((option) => option.text).includes(input.value)) {
+      const selectedOption = input.value
+      console.log('OPTION SELECTED!', selectedOption)
+      const toId = options.find((option) => option.text == selectedOption)?.jumpToId ?? ''
+      chooseOption(toId)
     }
-
-    if (currentDialog.value.action != undefined) {
-        const action = currentDialog.value.action
-        action()
-    }
-    if (currentDialog.value.nextPage != undefined) {
-        router.push(decodeURI(currentDialog.value.nextPage))
-    }
-    if (currentDialog.value.options.length != 0) {
-        const options = currentDialog.value.options
-        console.log('OPTIONS!', options)
-        if (options.map((option) => option.text).includes(input.value)) {
-            const selectedOption = input.value
-            console.log('OPTION SELECTED!', selectedOption)
-            const toId = options.find((option) => option.text == selectedOption)?.jumpToId ?? ''
-            chooseOption(toId)
-        }
+  } else {
+    if (currentDialog.value.nextId == undefined || currentDialog.value.nextId?.length == 0) {
+      currentDialogIndex.value++
     } else {
-        if (currentDialog.value.nextId == undefined || currentDialog.value.nextId?.length == 0) {
-            currentDialogIndex.value++
-        } else {
-            const targetIndex = dialog.value.findIndex(
-                (dialog) => dialog.id == currentDialog.value.nextId,
-            )
-            currentDialogIndex.value = targetIndex
-        }
+      const targetIndex = dialog.value.findIndex(
+        (dialog) => dialog.id == currentDialog.value.nextId,
+      )
+      currentDialogIndex.value = targetIndex
     }
-    input.value = ''
+  }
+  input.value = ''
 }
 
 function execEmit(emit: string) {

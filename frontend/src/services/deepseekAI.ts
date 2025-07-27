@@ -88,7 +88,7 @@ export class DeepSeekAI {
         }
 
         if (fullResponse.includes('（调用自毁工具）') || fullResponse.includes('selfDestruct')) {
-          window.location.href = '/empty?to=/twitter'
+          window.location.href = '/empty?to=/x'
         }
       }
 

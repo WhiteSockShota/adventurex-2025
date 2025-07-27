@@ -82,6 +82,7 @@ const router = createRouter({
     {
       path: '/x',
       component: TwitterView,
+      meta: { transition: 'fade' },
       children: [
         {
           path: '',

@@ -151,7 +151,7 @@ const handleAIChat = async () => {
         await scrollToBottom()
         // Simulate a delay for the "destruction"
         setTimeout(() => {
-          router.push('/x')
+          router.push('/empty?to=/x')
         }, 2000)
         return
       }
